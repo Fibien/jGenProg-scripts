@@ -85,7 +85,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	fi 
 	
 	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
-	echo "${4}, ${5}, ${1}, ${2} ${result}, ${generation}, ${time}" >> "/tmp/${3}/project_result.txt"
+	echo "${4},${5},${1},${2}${result},${generation},${time}" >> "/tmp/${3}/project_result.txt"
 	
 }
 
@@ -111,6 +111,8 @@ main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
     
     math_bugs=(53)
     
+	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
+	
     for bug in "${math_bugs[@]}"
     do
         #checkout_bug Math "$bug" Script_test 1 1
