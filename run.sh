@@ -37,6 +37,7 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop $6 Seed
 
 	local bug_location="/tmp/${3}/${4}_${5}/${1}/${2}"
+	local log_location="/tmp/${3}/log"
 	local filename="result_${4}_${5}_${1}_${2}.txt"
 
 	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
@@ -49,7 +50,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
     -location "${bug_location}" \
     -stopfirst true \
     -seed "${6}" \
-    > "${bug_location}/${filename}"
+    > "${log_location}/${filename}"
 
 }
 
