@@ -16,10 +16,6 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-# set the mutation_rates and population rates
-# mutation_rates=(0.25 0.5 0.75 1)
-# population_rates=(1 25 50 100 200 400)
-
 #---- Methods
 
 # Checkout a bug at a location in tmp
@@ -34,6 +30,7 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
     sudo mvn clean compile test -DskipTests
 }
 
+# Search for a solution with jGenProg
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop $6 Seed
 
 	local bug_location="/tmp/${3}/${4}_${5}/${1}/${2}"
@@ -83,7 +80,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	fi 
 	
 	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
-	echo "${4},${5},${1},${2},${result},${generation},${time}" > "/tmp/${3}/project_result.txt"
+	echo "${4},${5},${1},${2},${result},${generation},${time}" >> "/tmp/${3}/project_result.txt"
 	
 }
 
@@ -107,23 +104,41 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
     done
 }
 
+execute_math_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
+	local math_bug=(2,5,8,28,40,49,50,53,70,71,73,78,80,81,82,84,85,95)
+    execute_bug_category Math "${1}" "${2}" "${3}" "${4}" "${math_bug[@]}"
+}
 
-main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
+execute_time_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
+	local time_bug=(4,11)
+	execute_bug_category Time "${1}" "${2}" "${3}" "${4}" "${time_bug[@]}"
+}
+
+execute_chart_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
+	local chart_bugs=(1,3,5,7,13,16,25)
+	execute_bug_category Chart "${1}" "${2}" "${3}" "${4}" "${chart_bug[@]}"
+}
+
+
+main() { # args $1 Project_name
+
+	local project_name = "${1}"
+	local mutation_rate = 1 
+	local population_size = 1
+	local seed = 10
+
+	execute_math_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+	execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+	execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
     
-    local math_bugs=(53)
-    
-	execute_bug_category Math "${1}" 1 1 10 "${math_bugs[@]}"
+	#execute_bug_category Math "${1}" 1 1 10 "${math_bugs[@]}"
 	
-    #for bug in "${math_bugs[@]}"
-    #do
-        #checkout_bug Math "$bug" Script_test 1 1
-		#run_jgenprog Math "$bug" Script_test 1 1 10
-	#	write_result Math "$bug" Script_test 1 1
-    #done
 }
 
 # ---- MAIN -----
 
-main "$1" #mandatory argument when invoking mut.sh
+main "$1" #mandatory argument when invoking run.sh
 
-
+# set the mutation_rates and population rates
+# mutation_rates=(0.25 0.5 0.75 1)
+# population_rates=(1 25 50 100 200 400)
