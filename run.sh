@@ -64,6 +64,9 @@ create_folder(){ # $1 Folder location
 
 write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop
 	
+	echo "write result"
+	echo "Pop argument ${4}"
+	
 	local result_location="/tmp/${3}/log/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
 	local log_location="/tmp/${3}/logs/"
@@ -86,7 +89,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	
 }
 
-execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $5 Seed $@:6 bug_array_elements
+execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate $4 Population_size $5 Seed $@:6 bug_array_elements
 
 	local category="${1}"
 	local project_name="${2}"
@@ -94,6 +97,9 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $5 
 	local population_size="${4}"
 	local seed="${5}"
 	local bug_array="${@:6}"
+	
+	echo "execute bug category"
+	echo "Pop argument ${4}, Population_size variable ${population_size}"
 	
 	create_folder "/tmp/${3}/"
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
