@@ -55,7 +55,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 
 write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop
 	
-	local result_location="/tmp/${3}/${4}_${5}/${1}/${2}/"
+	local result_location="/tmp/${3}/log/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
@@ -93,6 +93,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $@:
 main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
     
     math_bugs=(53)
+	sudo mkdir "/tmp/Scrupt_test/log"
     
     for bug in "${math_bugs[@]}"
     do
