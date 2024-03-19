@@ -56,7 +56,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 create_folder(){ # $1 Folder location
 
 	# Check if the folder exists
-	if [ ! -d "${1}/log" ]; then
+	if [ ! -d "${1}" ]; then
 		sudo mkdir "${1}/"
 	fi
 
