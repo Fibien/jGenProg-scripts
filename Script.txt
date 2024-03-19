@@ -1,0 +1,89 @@
+#!/bin/bash
+
+#----- Paths
+
+# Define the path variable
+path2defects4j="/home/project/defects4j/framework/bin"
+
+# Use the path variable
+export PATH=$PATH:$path2defects4j
+
+#----- Validate arguments to the script
+
+if [ $# -ne 1 ]; then
+    echo "Error: Project name required"
+    echo "Usage: $0 <project_name>"
+    exit 1
+fi
+
+# set the mutation_rates and population rates
+# mutation_rates=(0.25 0.5 0.75 1)
+# population_rates=(1 25 50 100 200 400)
+
+#---- Methods
+
+# Checkout a bug at a location in tmp
+checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
+
+	local location="/tmp/${3}/${4}_${5}/${1}/${2}"
+
+    defects4j checkout -p "${1}" -v "${2}"b -w "${location}"
+    # Move to bug folder
+    cd "${location}"
+    # Compile the bug with maven
+    sudo mvn clean compile test -DskipTests
+}
+
+run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
+
+	local location="/tmp/${3}/${4}_${5}/${1}/${2}"
+
+	 #java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain \
+	 #-mode jgenprog \ 
+	 #-srcjavafolder /src/java/ \
+	 #-srctestfolder /src/test/  \
+	 #-binjavafolder /target/classes/ \
+	 #-bintestfolder  /target/test-classes/ \
+	 #-location "${location}" \
+	 #> "${location}/result_${2}_${4}_${5}.txt"
+	 
+	 java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog -srcjavafolder /src/java/ -srctestfolder /src/test/  -binjavafolder /target/classes/ -bintestfolder  /target/test-classes/ -location "${location}" > "${location}/result_${2}_${4}_${5}.txt" 
+
+}
+
+write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop
+	
+	local result_location="/tmp/${3}/${4}_${5}/${1}/${2}/result_${2}_${4}_${5}.txt"
+	
+	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
+	# grep -m 1 -o, print the first occurence, xargs removes beginning and trailing whitespaces
+	local result=$(grep -m 1 -o '^End Repair Search:.*' "${result_location}" | cut -d':' -f2- | sed 's/solution//' | xargs)
+	local time=$(grep -m 1 -o '^Time Total(s):.*' "${result_location}" | cut -d':' -f2- | xargs)
+	local generation=""
+	if [ "$result" == "Found" ]; then
+		generation=$(grep -m 1 -o '^GENERATION=.*' "${result_location}" | cut -d'=' -f2- | xargs)
+	else 
+		generation=$(grep -m 1 -o '^NR_GENERATIONS=.*' "${result_location}" | cut -d'=' -f2- | xargs)
+	fi 
+	
+	#mutation, population, kategori, bugg, solution (Found / Not Found), generation, time 
+	"${4}, ${5}, ${1}, ${2} ${result}, ${generation}, ${time}" >> "/tmp/${3}/project_result.txt"
+	
+}
+
+
+main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
+    
+    math_bugs=(53)
+    
+    for bug in "${math_bugs[@]}"
+    do
+        checkout_bug Math "$bug" Script_test 1 1
+		run_jgenprog Math "$bug" Script_test 1 1
+    done
+
+}
+
+# ---- MAIN -----
+
+main "$1" #mandatory argument when invoking mut.sh
