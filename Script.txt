@@ -111,7 +111,7 @@ main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
     
     math_bugs=(53)
     
-	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
+	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/Script_test/project_result.txt"
 	
     for bug in "${math_bugs[@]}"
     do
