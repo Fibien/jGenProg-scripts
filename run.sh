@@ -122,10 +122,10 @@ execute_chart_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size
 
 main() { # args $1 Project_name
 
-	local project_name = "${1}"
-	local mutation_rate = 1 
-	local population_size = 1
-	local seed = 10
+	local project_name="${1}"
+	local mutation_rate=1 
+	local population_size=1
+	local seed=10
 
 	execute_math_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 	execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
