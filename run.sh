@@ -71,6 +71,9 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
 	local log_location="/tmp/${3}/logs/"
 	
+	echo "Filename ${filename}"
+	echo "Path: ${result_location}${filename}" 
+	
 	create_folder "${log_location}/log"
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
@@ -106,8 +109,8 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 
 	for bug in "${bug_array[@]}"
     do
-        checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}"
-		run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}" "${seed}"
+        #checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}"
+		#run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}" "${seed}"
 		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}"
     done
 }
