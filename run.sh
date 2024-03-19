@@ -53,11 +53,11 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 
 }
 
-create_log_folder(){ # $1 Folder location
+create_folder(){ # $1 Folder location
 
 	# Check if the folder exists
 	if [ ! -d "${1}/log" ]; then
-		sudo mkdir "${1}/log"
+		sudo mkdir "${1}/"
 	fi
 
 }
@@ -68,7 +68,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
 	local log_location="/tmp/${3}/logs/"
 	
-	create_log_folder "${log_location}"
+	create_folder "${log_location}/log"
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
 	# grep -m 1 -o, print the first occurence, xargs removes beginning and trailing whitespaces
@@ -95,6 +95,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $5 
 	local seed="${5}"
 	local bug_array="${@:6}"
 	
+	create_folder "/tmp/${3}/"
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
@@ -110,8 +111,6 @@ main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
     
     local math_bugs=(53)
     
-	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/Script_test/project_result.txt"
-	
 	execute_bug_category Math "${1}" 1 1 10 "${math_bugs[@]}"
 	
     #for bug in "${math_bugs[@]}"
