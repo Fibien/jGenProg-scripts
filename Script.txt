@@ -37,19 +37,31 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop $6 Seed
 
 	local bug_location="/tmp/${3}/${4}_${5}/${1}/${2}"
-	local log_location="/tmp/${3}/logs/"
 	local filename ="result_${4}_${5}_${1}_${2}.txt"
 
-	 #java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain \
-	 #-mode jgenprog \ 
-	 #-srcjavafolder /src/java/ \
-	 #-srctestfolder /src/test/  \
-	 #-binjavafolder /target/classes/ \
-	 #-bintestfolder  /target/test-classes/ \
-	 #-location "${location}" \
-	 #> "${location}/result_${2}_${4}_${5}.txt"
+	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+    fr.inria.main.evolution.AstorMain \
+    -mode jgenprog \
+    -srcjavafolder /src/java/ \
+    -srctestfolder /src/test/ \
+    -binjavafolder /target/classes/ \
+    -bintestfolder /target/test-classes/ \
+    -location "${bug_location}" \
+    -stopfirst true \
+    -seed "${6}" \
+    > "${location}/${filename}"
 	 
-	 java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog -srcjavafolder /src/java/ -srctestfolder /src/test/  -binjavafolder /target/classes/ -bintestfolder  /target/test-classes/ -location "${bug_location}" -stopfirst true -seed "${6}"  > "${location}/${filename}" 
+	 #java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog -srcjavafolder /src/java/ -srctestfolder /src/test/  -binjavafolder /target/classes/ -bintestfolder  /target/test-classes/ -location "${bug_location}" -stopfirst true -seed "${6}"  > "${location}/${filename}" 
+
+}
+
+create_log_folder(){ # $1 Folder location
+
+	# Check if the folder exists
+	if [ ! -d "${1}/log" ]; then
+		# If the folder doesn't exist, create it
+		sudo mkdir -p "${1}/log"
+	fi
 
 }
 
@@ -57,6 +69,9 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	
 	local result_location="/tmp/${3}/log/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
+	local log_location="/tmp/${3}/logs/"
+	
+	create_log_folder "${log_location}"
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
 	# grep -m 1 -o, print the first occurence, xargs removes beginning and trailing whitespaces
@@ -93,7 +108,6 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $@:
 main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
     
     math_bugs=(53)
-	sudo mkdir "/tmp/Script_test/log"
     
     for bug in "${math_bugs[@]}"
     do
@@ -106,3 +120,5 @@ main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
 # ---- MAIN -----
 
 main "$1" #mandatory argument when invoking mut.sh
+
+
