@@ -66,9 +66,9 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	
 	local result_location="/tmp/${3}/log/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
-	local log_location="/tmp/${3}/logs/"
+	local log_location="/tmp/${3}/log/"
 	
-	create_folder "${log_location}/log"
+	create_folder "${log_location}"
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
 	# grep -m 1 -o, print the first occurence, xargs removes beginning and trailing whitespaces
