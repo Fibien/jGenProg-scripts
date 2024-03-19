@@ -82,7 +82,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	fi 
 	
 	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
-	echo "${4},${5},${1},${2},${result},${generation},${time}" >> "/tmp/${3}/project_result.txt"
+	echo "${4},${5},${1},${2},${result},${generation},${time}" > "/tmp/${3}/project_result.txt"
 	
 }
 
