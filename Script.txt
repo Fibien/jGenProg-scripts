@@ -49,7 +49,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
     -location "${bug_location}" \
     -stopfirst true \
     -seed "${6}" \
-    > "${location}/${filename}"
+    > "${bug_location}/${filename}"
 	 
 	 #java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog -srcjavafolder /src/java/ -srctestfolder /src/test/  -binjavafolder /target/classes/ -bintestfolder  /target/test-classes/ -location "${bug_location}" -stopfirst true -seed "${6}"  > "${location}/${filename}" 
 
@@ -85,7 +85,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	fi 
 	
 	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
-	echo "${4},${5},${1},${2}${result},${generation},${time}" >> "/tmp/${3}/project_result.txt"
+	echo "${4},${5},${1},${2},${result},${generation},${time}" >> "/tmp/${3}/project_result.txt"
 	
 }
 
@@ -109,7 +109,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $@:
 
 main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
     
-    math_bugs=(53)
+    local math_bugs=(53)
     
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/Script_test/project_result.txt"
 	
