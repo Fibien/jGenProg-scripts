@@ -100,8 +100,8 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 
 	for bug in "${bug_array[@]}"
     do
-        #checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
-		#run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+        checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
+		run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
     done
 }
