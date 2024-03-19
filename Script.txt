@@ -84,7 +84,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 		generation=$(grep -m 1 -o '^NR_GENERATIONS=.*' "${result_location}${filename}" | cut -d'=' -f2- | xargs)
 	fi 
 	
-	#mutation, population, kategori, bugg, solution (Found / Not Found), generation, time 
+	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
 	echo "${4}, ${5}, ${1}, ${2} ${result}, ${generation}, ${time}" >> "/tmp/${3}/project_result.txt"
 	
 }
@@ -96,6 +96,8 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $@:
 	local mutation_rate="{3}"
 	local population_size="{4}"
 	local bug_array="{@:5}"
+	
+	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
     do
