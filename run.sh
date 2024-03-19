@@ -57,8 +57,7 @@ create_log_folder(){ # $1 Folder location
 
 	# Check if the folder exists
 	if [ ! -d "${1}/log" ]; then
-		# If the folder doesn't exist, create it
-		sudo mkdir -p "${1}/log"
+		sudo mkdir "${1}/log"
 	fi
 
 }
@@ -87,20 +86,22 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	
 }
 
-execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $@:5 bug_array_elements
+execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mut $4 pop $5 Seed $@:6 bug_array_elements
 
 	local category="${1}"
 	local project_name="{2}"
 	local mutation_rate="{3}"
 	local population_size="{4}"
-	local bug_array="{@:5}"
+	local seed="{5}"
+	local bug_array="{@:6}"
 	
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
     do
-        checkout_bug "${category}, ${bug}, ${project_name}, ${mutation_rate}, ${population_rate}"
-		run_jgenprog "${category}, ${bug}, ${project_name}, ${mutation_rate}, ${population_rate}"
+        checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}"
+		run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}" "${seed}"
+		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}"
     done
 }
 
@@ -111,12 +112,14 @@ main() { # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 pop
     
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/Script_test/project_result.txt"
 	
-    for bug in "${math_bugs[@]}"
-    do
+	execute_bug_category Math "${1}" 1 1 10 "${math_bugs[@]}"
+	
+    #for bug in "${math_bugs[@]}"
+    #do
         #checkout_bug Math "$bug" Script_test 1 1
 		#run_jgenprog Math "$bug" Script_test 1 1 10
-		write_result Math "$bug" Script_test 1 1
-    done
+	#	write_result Math "$bug" Script_test 1 1
+    #done
 }
 
 # ---- MAIN -----
