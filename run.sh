@@ -64,15 +64,9 @@ create_folder(){ # $1 Folder location
 
 write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop
 	
-	echo "write result"
-	echo "Pop argument ${4}"
-	
 	local result_location="/tmp/${3}/log/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
 	local log_location="/tmp/${3}/logs/"
-	
-	echo "Filename ${filename}"
-	echo "Path: ${result_location}${filename}" 
 	
 	create_folder "${log_location}/log"
 	
@@ -101,17 +95,14 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	local seed="${5}"
 	local bug_array="${@:6}"
 	
-	echo "execute bug category"
-	echo "Pop argument ${4}, Population_size variable ${population_size}"
-	
 	create_folder "/tmp/${3}/"
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
     do
-        #checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}"
-		#run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}" "${seed}"
-		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_rate}"
+        #checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
+		#run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
     done
 }
 
