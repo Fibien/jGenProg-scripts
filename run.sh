@@ -35,33 +35,47 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	local bug_location="/tmp/${3}/${4}_${5}/${1}/${2}"
 	local log_location="/tmp/${3}/logs"
 	local filename="result_${4}_${5}_${1}_${2}.txt"
+	local dependency_location="${bug_location}/lib/"
 
-	# Run the specific bug with jGenProg
-	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-    fr.inria.main.evolution.AstorMain \
-    -mode jgenprog \
-    -srcjavafolder /src/java/ \
-    -srctestfolder /src/test/ \
-    -binjavafolder /target/classes/ \
-    -bintestfolder /target/test-classes/ \
-    -location "${bug_location}" \
-    -stopfirst true \
-    -seed "${6}" \
-    > "${log_location}/${filename}"
-
+	if [ -d "${dependency_location}" ]; then
+	
+		# Run the specific bug with jGenProg
+		java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+		fr.inria.main.evolution.AstorMain \
+		-mode jgenprog \
+		-srcjavafolder /src/java/ \
+		-srctestfolder /src/test/ \
+		-binjavafolder /target/classes/ \
+		-bintestfolder /target/test-classes/ \
+		-location "${bug_location}" \
+		-dependencies "${dependency_location}"
+		-stopfirst true \
+		-seed "${6}" \
+		> "${log_location}/${filename}"
+	
+	else
+	
+		# Run the specific bug with jGenProg
+		java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+		fr.inria.main.evolution.AstorMain \
+		-mode jgenprog \
+		-srcjavafolder /src/java/ \
+		-srctestfolder /src/test/ \
+		-binjavafolder /target/classes/ \
+		-bintestfolder /target/test-classes/ \
+		-location "${bug_location}" \
+		-stopfirst true \
+		-seed "${6}" \
+		> "${log_location}/${filename}"
+	
+	fi
 }
 
 create_folder(){ # $1 Folder location
 
-	echo "create folder argument with $1"
-	echo "create folder argument with ${1}"
-
 	# Check if the folder exists adn create if not present
 	if [ ! -d "${1}" ]; then
 		sudo mkdir "${1}/"
-		echo "${1}" "created"
-	else
-		echo "${1}" "NOT created"
 	fi
 
 }
