@@ -104,7 +104,6 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 		echo "Category" "${category}" "Bug" "${bug}" "Name" "${project_name}" "Mut" "${mutation_rate}" "Pop" "${population_size}"
 		
     done
-	
 }
 
 execute_math_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
