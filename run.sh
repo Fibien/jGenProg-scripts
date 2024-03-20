@@ -16,7 +16,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-#---- Methods
+#---- Functions
 
 # Checkout a bug at a location in tmp
 checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
@@ -98,9 +98,11 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 
 	for bug in "${bug_array[@]}"
     do
-        checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
-		run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
-		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
+        #checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
+		#run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+		#write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
+		echo "Category" "${category}" "Bug" "${bug}" "Name" "${project_name}" "Mut" "${mutation_rate}" "Pop" "${population_size}"
+		
     done
 }
 
