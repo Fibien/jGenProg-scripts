@@ -21,12 +21,24 @@ fi
 checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $Pop
 
 	local location="/tmp/${3}/${4}_${5}/${1}/${2}"
+	local pom_file="${location}/pom.xml"
+	local ant_folder="${location}/ant/"
 
     defects4j checkout -p "${1}" -v "${2}"b -w "${location}"
     # Move to bug folder
     cd "${location}"
     # Compile the bug with maven
-    sudo mvn clean compile test -DskipTests
+	
+	if [ -f "${pom_file}" ]; then
+		sudo mvn clean compile test -DskipTests
+	elif [ -d "${ant_folder}" ]; then
+		defects4j compile
+	else
+		echo "Neither pomfile or ant folder found for Category ${1} Bug ${2}" >> "/tmp/${3}/logs/error_log.txt"
+		# try to compile the bug with defects4j 
+		defects4j compile
+	fi	
+	   
 }
 
 # Search for a solution with jGenProg
@@ -120,7 +132,8 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	create_folder "${result_location}"
 	create_folder "${log_location}"
 	
-	echo "Mutation Population Category BuggID Solution Generation Time " >> "${result_location}/project_result.txt"
+	#Flytta ut till huvudfunktionen, ska bara skapas en gång
+	echo "Mutation,Population,Category,BuggID,Solution,Generation,Time" >> "${result_location}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
     do
@@ -147,26 +160,37 @@ execute_chart_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size
 	execute_bug_category Chart "${1}" "${2}" "${3}" "${4}" chart_bugs
 }
 
-main() { # args $1 Project_name
+execute_bug_set(){ # $1 Project_name $2 Iteration $3 Seed
 
 	local project_name="${1}"
-	#local mutation_rate=1 
-	#local population_size=1
-	local seed=10
-	local mutation_rates=(0.25 0.5 0.75 1)
-	local population_size=(1 25 50 100 200 400)
+	local iteration="${2}" #implementera iteration
+	local seed="${3}"
+
+	#local mutation_rates=(0.25 0.5 0.75 1)
+	#local population_size=(1 25 50 100 200 400)
+	local mutation_rates=(1)
+	local population_size=(1)
 	
 	for mutation_rate in "${mutation_rates[@]}"
 	do
 		for population_size in "${population_size[@]}"
 		do
 			execute_math_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
-			execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
-			execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+			#execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+			#execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 		done
 	done
 	
-	
+}
+
+
+main() { # args $1 Project_name
+
+	local project_name="${1}"
+	#local mutation_rate=1 
+	#local population_size=1
+	local seed=10
+
 
 	
 }
