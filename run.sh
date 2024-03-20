@@ -107,19 +107,18 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 }
 
 execute_math_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
-	local -a math_bug=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
-    #execute_bug_category Math "${1}" "${2}" "${3}" "${4}" ${math_bug[@]}"
+	local math_bug=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
 	execute_bug_category Math "${1}" "${2}" "${3}" "${4}" math_bug
 }
 
 execute_time_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
-	time_bug=(4 11)
-	#execute_bug_category Time "${1}" "${2}" "${3}" "${4}" "${time_bug[@]}"
+	local time_bug=(4 11)
+	execute_bug_category Time "${1}" "${2}" "${3}" "${4}" time_bug
 }
 
 execute_chart_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
-	chart_bugs=(1 3 5 7 13 16 25)
-	#execute_bug_category Chart "${1}" "${2}" "${3}" "${4}" "${chart_bug[@]}"
+	local chart_bugs=(1 3 5 7 13 16 25)
+	execute_bug_category Chart "${1}" "${2}" "${3}" "${4}" chart_bug
 }
 
 main() { # args $1 Project_name
