@@ -10,15 +10,15 @@ export PATH=$PATH:$path2defects4j
 
 #----- Validate arguments to the script
 
-if [ $# -ne 1 ]; then
-    echo "Error: Project name required"
+if [ $# -ne 2 ]; then
+    echo "Error: Project name required and number of iterations required"
     exit 1
 fi
 
 #---- Functions
 
 # Checkout a bug at a location in tmp
-checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
+checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $Pop
 
 	local location="/tmp/${3}/${4}_${5}/${1}/${2}"
 
@@ -30,7 +30,7 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
 }
 
 # Search for a solution with jGenProg
-run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop $6 Seed
+run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $5 Population_size $6 Seed
 
 	local bug_location="/tmp/${3}/${4}_${5}/${1}/${2}"
 	local log_location="/tmp/${3}/logs"
@@ -48,9 +48,11 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 		-binjavafolder /target/classes/ \
 		-bintestfolder /target/test-classes/ \
 		-location "${bug_location}" \
-		-dependencies "${dependency_location}"
-		-stopfirst true \
+		-dependencies "${dependency_location}" \
+		-mutationrate "${4}" \
+		-population "${5}" \
 		-seed "${6}" \
+		-stopfirst true \
 		> "${log_location}/${filename}"
 	
 	else
@@ -64,8 +66,10 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 		-binjavafolder /target/classes/ \
 		-bintestfolder /target/test-classes/ \
 		-location "${bug_location}" \
-		-stopfirst true \
+		-mutationrate "${4}" \
+		-population "${5}" \
 		-seed "${6}" \
+		-stopfirst true \
 		> "${log_location}/${filename}"
 	
 	fi
@@ -81,7 +85,7 @@ create_folder(){ # $1 Folder location
 }
 
 # Extracts The results, time, and generation from the bug result textfile and save the row in a CSV file
-write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop
+write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $5 Pop
 	
 	local result_location="/tmp/${3}/logs/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
@@ -146,20 +150,27 @@ execute_chart_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size
 main() { # args $1 Project_name
 
 	local project_name="${1}"
-	local mutation_rate=1 
-	local population_size=1
+	#local mutation_rate=1 
+	#local population_size=1
 	local seed=10
+	local mutation_rates=(0.25 0.5 0.75 1)
+	local population_size=(1 25 50 100 200 400)
 	
-	execute_math_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
-	#execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
-	#execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+	for mutation_rate in "${mutation_rates[@]}"
+	do
+		for population_size in "${population_size[@]}"
+		do
+			execute_math_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+			execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+			execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+		done
+	done
+	
+	
+
 	
 }
 
 # ---- MAIN -----
 
-# set the mutation_rates and population rates
-# mutation_rates=(0.25 0.5 0.75 1)
-# population_rates=(1 25 50 100 200 400)
-
-main "$1" #mandatory argument when invoking run.sh
+main "$1" "$2" #mandatory argument when invoking run.sh
