@@ -12,7 +12,6 @@ export PATH=$PATH:$path2defects4j
 
 if [ $# -ne 1 ]; then
     echo "Error: Project name required"
-    echo "Usage: $0 <project_name>"
     exit 1
 fi
 
@@ -37,6 +36,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	local log_location="/tmp/${3}/log"
 	local filename="result_${4}_${5}_${1}_${2}.txt"
 
+	# Run the specific bug with jGenProg
 	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
     fr.inria.main.evolution.AstorMain \
     -mode jgenprog \
@@ -53,13 +53,14 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 
 create_folder(){ # $1 Folder location
 
-	# Check if the folder exists
+	# Check if the folder exists adn create if not present
 	if [ ! -d "${1}" ]; then
 		sudo mkdir "${1}/"
 	fi
 
 }
 
+# Extracts The results, time, and generation from the bug result textfile and save the row in a CSV file
 write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop
 	
 	local result_location="/tmp/${3}/log/"
@@ -98,10 +99,9 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 
 	for bug in "${bug_array[@]}"
     do
-        #checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
-		#run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
-		#write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
-		echo "Category" "${category}" "Bug" "${bug}" "Name" "${project_name}" "Mut" "${mutation_rate}" "Pop" "${population_size}"
+        checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
+		run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
+		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
 		
     done
 }
@@ -131,8 +131,6 @@ main() { # args $1 Project_name
 	execute_math_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 	execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 	execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
-    
-	#execute_bug_category Math "${1}" 1 1 10 "${math_bugs[@]}"
 	
 }
 
