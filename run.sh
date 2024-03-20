@@ -91,7 +91,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	local mutation_rate="${3}"
 	local population_size="${4}"
 	local seed="${5}"
-	local bug_array="${@:6}"
+	local bug_array=("${@:6}")
 	
 	create_folder "/tmp/${3}/"
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
