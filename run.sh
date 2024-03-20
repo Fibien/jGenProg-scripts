@@ -49,6 +49,34 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	local filename="result_${4}_${5}_${1}_${2}.txt"
 	local dependency_location="${bug_location}/lib/"
 
+	local maven_command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+		fr.inria.main.evolution.AstorMain \
+		-mode jgenprog \
+		-srcjavafolder /src/java/ \
+		-srctestfolder /src/test/ \
+		-binjavafolder /target/classes/ \
+		-bintestfolder /target/test-classes/ \
+		-location "${bug_location}" \
+		-mutationrate "${4}" \
+		-population "${5}" \
+		-seed "${6}" \
+		-stopfirst true \ " 
+		
+	local ant_command="cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain 
+		-mode jgenprog 
+		-srcjavafolder source/ 
+		-srctestfolder tests/ 
+		-binjavafolder build/ 
+		-bintestfolder build-tests/ 
+		-location /tmp/Chart/1/ 
+		-dependencies lib/ 
+		-stopfirst"
+
+		
+		
+		
+	local ant_command=""	
+
 	if [ -d "${dependency_location}" ]; then
 	
 		# Run the specific bug with jGenProg
