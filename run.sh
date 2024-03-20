@@ -33,7 +33,7 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $Pop
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop $6 Seed
 
 	local bug_location="/tmp/${3}/${4}_${5}/${1}/${2}"
-	local log_location="/tmp/${3}/log"
+	local log_location="/tmp/${3}/logs"
 	local filename="result_${4}_${5}_${1}_${2}.txt"
 
 	# Run the specific bug with jGenProg
@@ -63,11 +63,8 @@ create_folder(){ # $1 Folder location
 # Extracts The results, time, and generation from the bug result textfile and save the row in a CSV file
 write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 Pop
 	
-	local result_location="/tmp/${3}/log/"
+	local result_location="/tmp/${3}/logs/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
-	local log_location="/tmp/${3}/log/"
-	
-	create_folder "${log_location}"
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
 	# grep -m 1 -o, print the first occurence, xargs removes beginning and trailing whitespaces
@@ -93,8 +90,12 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	local population_size="${4}"
 	local seed="${5}"
 	local -n bug_array="${6}"
+	local result_location="/tmp/${3}"
+	local log_location="${result_location}/logs/"
 	
-	create_folder "/tmp/${3}/"
+	create_folder "${result_location}"
+	create_folder "${log_location}"
+	
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
@@ -128,7 +129,7 @@ main() { # args $1 Project_name
 	local mutation_rate=1 
 	local population_size=1
 	local seed=10
-
+	
 	execute_math_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 	#execute_time_bugs  "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 	#execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
