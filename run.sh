@@ -84,14 +84,14 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 	
 }
 
-execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate $4 Population_size $5 Seed $@:6 bug_array_elements
+execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate $4 Population_size $5 Seed $6 bug_array 
 
 	local category="${1}"
 	local project_name="${2}"
 	local mutation_rate="${3}"
 	local population_size="${4}"
 	local seed="${5}"
-	local bug_array=("${@:6}")
+	local -n bug_array="${6}
 	
 	create_folder "/tmp/${3}/"
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
@@ -108,7 +108,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 
 execute_math_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
 	local math_bug=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
-    execute_bug_category Math "${1}" "${2}" "${3}" "${4}" "${math_bug[@]}"
+    execute_bug_category Math "${1}" "${2}" "${3}" "${4}" "${math_bug}"
 }
 
 execute_time_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
