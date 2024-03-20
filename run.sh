@@ -53,9 +53,15 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mut $5 P
 
 create_folder(){ # $1 Folder location
 
+	echo "create folder argument with $1"
+	echo "create folder argument with ${1}"
+
 	# Check if the folder exists adn create if not present
 	if [ ! -d "${1}" ]; then
 		sudo mkdir "${1}/"
+		echo "${1}" "created"
+	else
+		echo "${1}" "NOT created"
 	fi
 
 }
@@ -90,13 +96,13 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	local population_size="${4}"
 	local seed="${5}"
 	local -n bug_array="${6}"
-	local result_location="/tmp/${3}"
+	local result_location="/tmp/${project_name}"
 	local log_location="${result_location}/logs/"
 	
 	create_folder "${result_location}"
 	create_folder "${log_location}"
 	
-	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
+	echo "Mutation Population Category BuggID Solution Generation Time " >> "${result_location}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
     do
