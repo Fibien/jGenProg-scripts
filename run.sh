@@ -91,7 +91,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	local mutation_rate="${3}"
 	local population_size="${4}"
 	local seed="${5}"
-	local -n bug_array="${6}
+	local -n bug_array="${6}"
 	
 	create_folder "/tmp/${3}/"
 	echo "Mutation Population Category BuggID Solution Generation Time " >> "/tmp/${3}/project_result.txt"
@@ -104,6 +104,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 		echo "Category" "${category}" "Bug" "${bug}" "Name" "${project_name}" "Mut" "${mutation_rate}" "Pop" "${population_size}"
 		
     done
+	
 }
 
 execute_math_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size $4 Seed
@@ -138,8 +139,8 @@ main() { # args $1 Project_name
 
 # ---- MAIN -----
 
-main "$1" #mandatory argument when invoking run.sh
-
 # set the mutation_rates and population rates
 # mutation_rates=(0.25 0.5 0.75 1)
 # population_rates=(1 25 50 100 200 400)
+
+main "$1" #mandatory argument when invoking run.sh
