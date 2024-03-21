@@ -48,6 +48,8 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	local log_location="/tmp/${3}/logs"
 	local filename="result_${4}_${5}_${1}_${2}.txt"
 	local dependency_location="${bug_location}/lib/"
+	local pom_location="${bug_location}/pom.xml"
+	local ant_location="${bug_location}/ant/"
 
 	local maven_command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
 		fr.inria.main.evolution.AstorMain \
@@ -56,63 +58,85 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 		-srctestfolder /src/test/ \
 		-binjavafolder /target/classes/ \
 		-bintestfolder /target/test-classes/ \
-		-location "${bug_location}" \
-		-mutationrate "${4}" \
-		-population "${5}" \
-		-seed "${6}" \
-		-stopfirst true \ " 
+		-location ${bug_location} \
+		-mutationrate ${4} \
+		-population ${5} \
+		-seed ${6} \
+		-stopfirst true" 
 		
-	local ant_command="cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain 
-		-mode jgenprog 
-		-srcjavafolder source/ 
-		-srctestfolder tests/ 
-		-binjavafolder build/ 
-		-bintestfolder build-tests/ 
-		-location /tmp/Chart/1/ 
-		-dependencies lib/ 
-		-stopfirst"
-
-		
-		
-		
-	local ant_command=""	
-
-	if [ -d "${dependency_location}" ]; then
-	
-		# Run the specific bug with jGenProg
-		java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-		fr.inria.main.evolution.AstorMain \
+	local ant_command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+	    fr.inria.main.evolution.AstorMain \
 		-mode jgenprog \
-		-srcjavafolder /src/java/ \
-		-srctestfolder /src/test/ \
-		-binjavafolder /target/classes/ \
-		-bintestfolder /target/test-classes/ \
-		-location "${bug_location}" \
-		-dependencies "${dependency_location}" \
-		-mutationrate "${4}" \
-		-population "${5}" \
-		-seed "${6}" \
-		-stopfirst true \
-		> "${log_location}/${filename}"
+		-srcjavafolder source/ \
+		-srctestfolder tests/ \
+		-binjavafolder build/ \
+		-bintestfolder build-tests/ \
+		-location ${bug_location} \
+		-stopfirst true"
+
+	# Chart ok med den här lösningen
 	
+
+	# Maven with dependencies
+	if [ -d "${pom_location}" ] && [ -f "${dependency_location}" ]; then
+		java "${maven_command}" -dependencies "${dependency_location}" > "${log_location}/${filename}"
+	elif [ -d "${pom_location}" ]; then
+		java "${maven_command}" > "${log_location}/${filename}"
+	# Ant with dependencies
+	elif [ -d "${ant_location}" ] && [ -f "${dependency_location}" ]; then	
+		java "${ant_command}" -dependencies "${dependency_location}" > "${log_location}/${filename}"
 	else
+		java "${ant_command}" > "${log_location}/${filename}"
+	fi 	
+
+	#if [ -d "${dependency_location}" ]; then
+	#
+	#	# Run the specific bug with jGenProg
+	#	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+	#	fr.inria.main.evolution.AstorMain \
+	#	-mode jgenprog \
+	#	-srcjavafolder /src/java/ \
+	#	-srctestfolder /src/test/ \
+	#	-binjavafolder /target/classes/ \
+	#	-bintestfolder /target/test-classes/ \
+	#	-location "${bug_location}" \
+	#	-dependencies "${dependency_location}" \
+	#	-mutationrate "${4}" \
+	#	-population "${5}" \
+	#	-seed "${6}" \
+	#	-stopfirst true \
+	#	> "${log_location}/${filename}"
 	
-		# Run the specific bug with jGenProg
-		java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-		fr.inria.main.evolution.AstorMain \
-		-mode jgenprog \
-		-srcjavafolder /src/java/ \
-		-srctestfolder /src/test/ \
-		-binjavafolder /target/classes/ \
-		-bintestfolder /target/test-classes/ \
-		-location "${bug_location}" \
-		-mutationrate "${4}" \
-		-population "${5}" \
-		-seed "${6}" \
-		-stopfirst true \
-		> "${log_location}/${filename}"
+	# Time 1 - 11
+	#-srcjavafolder src/main/java/ -srctestfolder src/test/java/ -binjavafolder target/classes/ -bintestfolder target/test-classes/
 	
-	fi
+	#Math 1 - 84
+	# -srcjavafolder src/main/java/ -srctestfolder src/test/java/ -binjavafolder target/classes/ -bintestfolder target/test-classes
+	
+	# Math 85+ 
+	#-srcjavafolder src/java/ -srctestfolder src/test/ -binjavafolder target/classes/ -bintestfolder target/test-classes/
+	
+	# Chart
+	# -srcjavafolder source/ -srctestfolder tests/ -binjavafolder build/ -bintestfolder build-tests/
+	
+	#else
+	#
+	#	# Run the specific bug with jGenProg
+	#	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+	#	fr.inria.main.evolution.AstorMain \
+	#	-mode jgenprog \
+	#	-srcjavafolder /src/java/ \
+	#	-srctestfolder /src/test/ \
+	#	-binjavafolder /target/classes/ \
+	#	-bintestfolder /target/test-classes/ \
+	#	-location "${bug_location}" \
+	#	-mutationrate "${4}" \
+	#	-population "${5}" \
+	#	-seed "${6}" \
+	#	-stopfirst true \
+	#	> "${log_location}/${filename}"
+	#
+	#fi
 }
 
 create_folder(){ # $1 Folder location
@@ -219,8 +243,6 @@ main() { # args $1 Project_name
 	#local population_size=1
 	local seed=10
 
-
-	
 }
 
 # ---- MAIN -----
