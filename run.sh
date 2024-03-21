@@ -21,23 +21,26 @@ fi
 checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $Pop
 
 	local location="/tmp/${3}/${4}_${5}/${1}/${2}"
-	local pom_file="${location}/pom.xml"
-	local ant_folder="${location}/ant/"
+	#local pom_file="${location}/pom.xml"
+	#local ant_folder="${location}/ant/"
 
     defects4j checkout -p "${1}" -v "${2}"b -w "${location}"
     # Move to bug folder
     cd "${location}"
     # Compile the bug with maven
 	
-	if [ -f "${pom_file}" ]; then
-		sudo mvn clean compile test -DskipTests
-	elif [ -d "${ant_folder}" ]; then
-		defects4j compile
-	else
-		echo "Neither pomfile or ant folder found for Category ${1} Bug ${2}" >> "/tmp/${3}/logs/error_log.txt"
+	#Only compile using defects4j
+	defects4j compile
+	
+	#if [ -f "${pom_file}" ]; then
+	#	sudo mvn clean compile test -DskipTests
+	#elif [ -d "${ant_folder}" ]; then
+	#	defects4j compile
+	#else
+	#	echo "Neither pomfile or ant folder found for Category ${1} Bug ${2}" >> "/tmp/${3}/logs/error_log.txt"
 		# try to compile the bug with defects4j 
-		defects4j compile
-	fi	
+	#	defects4j compile
+	#fi	
 	   
 }
 
@@ -212,11 +215,11 @@ execute_chart_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size
 	execute_bug_category Chart "${1}" "${2}" "${3}" "${4}" chart_bugs
 }
 
-execute_bug_set(){ # $1 Project_name $2 Iteration $3 Seed
+execute_bug_set(){ # $1 Project_name $2 Seed $3 Iteration
 
 	local project_name="${1}"
-	local iteration="${2}" #implementera iteration
-	local seed="${3}"
+	local seed="${2}"
+	local iteration="${3}" #update folder structures so iteration is included
 
 	#local mutation_rates=(0.25 0.5 0.75 1)
 	#local population_size=(1 25 50 100 200 400)
@@ -235,14 +238,23 @@ execute_bug_set(){ # $1 Project_name $2 Iteration $3 Seed
 	
 }
 
+execute_iterations(){ # args $1 Project_name $2 Iterations $3 Seed
+	
+	local iterations="${2}"
+	
+	# when iteration with seq 1 is the first value
+	for i in $(seq ${iterations}); 
+	do
+		execute_bug_set() "${1}" "${3}" i
+	done
+}
 
-main() { # args $1 Project_name
 
-	local project_name="${1}"
-	#local mutation_rate=1 
-	#local population_size=1
-	local seed=10
+main() { # args $1 Project_name $2 Iterations
 
+	local seed=1
+	#execute_bug_set "${1}" "${2}" "${seed}" 
+	execute_iterations "${1}" "${2}" "${seed}" 
 }
 
 # ---- MAIN -----
