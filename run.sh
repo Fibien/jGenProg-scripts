@@ -44,45 +44,20 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	local log_location="/${experiment_location}/${3}/logs"
 	local filename="result_${4}_${5}_${1}_${2}.txt"
 	local dependency_location="${bug_location}/lib/"
-	local pom_location="${bug_location}/pom.xml"
-	local ant_location="${bug_location}/ant/"
-
-	local maven_command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-		fr.inria.main.evolution.AstorMain \
-		-mode jgenprog \
-		-srcjavafolder /src/java/ \
-		-srctestfolder /src/test/ \
-		-binjavafolder /target/classes/ \
-		-bintestfolder /target/test-classes/ \
-		-location ${bug_location} \
-		-mutationrate ${4} \
-		-population ${5} \
-		-seed ${6} \
-		-stopfirst true" 
 		
-	local ant_command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-	    fr.inria.main.evolution.AstorMain \
-		-mode jgenprog \
-		-srcjavafolder source/ \
-		-srctestfolder tests/ \
-		-binjavafolder build/ \
-		-bintestfolder build-tests/ \
-		-location ${bug_location} \
-		-stopfirst true"
-		
-	local time_paths="-srcjavafolder src/main/java/ \
+	local time_paths=" -srcjavafolder src/main/java/ \
 	-srctestfolder src/test/java/ \
 	-binjavafolder target/classes/ \
 	-bintestfolder target/test-classes"	
 		
 	local math_1_to_84_paths="${time_paths}"
 
-	local math_85_plus_path="-srcjavafolder src/java/ \
+	local math_85_plus_path=" -srcjavafolder src/java/ \
 	-srctestfolder src/test/ \
 	-binjavafolder target/classes/ \
 	-bintestfolder target/test-classes/"
 	
-	local chart_paths="-srcjavafolder source/ \
+	local chart_paths=" -srcjavafolder source/ \
 	-srctestfolder tests/ \
 	-binjavafolder build/ \
 	-bintestfolder build-tests/"
@@ -106,85 +81,20 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 		exit 1
 	fi
 	
-	command+="
-	-location ${bug_location} \
-	- dependency ${bug_location}/lib/ \
+	command+=" -location ${bug_location} \
+	-dependency ${dependency_location} \
 	-mutationrate ${4} \
 	-population ${5} \
 	-seed ${6} \
 	-stopfirst true" 
 	
+	java "${command}" > "${log_location}/${filename}"
 	
-
-
-	# Chart ok med den här lösningen
-	
-
-	# Maven with dependencies
-	if [ -d "${pom_location}" ] && [ -f "${dependency_location}" ]; then
-		java "${maven_command}" -dependencies "${dependency_location}" > "${log_location}/${filename}"
-	elif [ -d "${pom_location}" ]; then
-		java "${maven_command}" > "${log_location}/${filename}"
-	# Ant with dependencies
-	elif [ -d "${ant_location}" ] && [ -f "${dependency_location}" ]; then	
-		java "${ant_command}" -dependencies "${dependency_location}" > "${log_location}/${filename}"
-	else
-		java "${ant_command}" > "${log_location}/${filename}"
-	fi 	
-
-	#if [ -d "${dependency_location}" ]; then
-	#
-	#	# Run the specific bug with jGenProg
-	#	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-	#	fr.inria.main.evolution.AstorMain \
-	#	-mode jgenprog \
-	#	-srcjavafolder /src/java/ \
-	#	-srctestfolder /src/test/ \
-	#	-binjavafolder /target/classes/ \
-	#	-bintestfolder /target/test-classes/ \
-	#	-location "${bug_location}" \
-	#	-dependencies "${dependency_location}" \
-	#	-mutationrate "${4}" \
-	#	-population "${5}" \
-	#	-seed "${6}" \
-	#	-stopfirst true \
-	#	> "${log_location}/${filename}"
-	
-	# Time 1 - 11
-	#-srcjavafolder src/main/java/ -srctestfolder src/test/java/ -binjavafolder target/classes/ -bintestfolder target/test-classes/
-	
-	#Math 1 - 84
-	# -srcjavafolder src/main/java/ -srctestfolder src/test/java/ -binjavafolder target/classes/ -bintestfolder target/test-classes
-	
-	# Math 85+ 
-	#-srcjavafolder src/java/ -srctestfolder src/test/ -binjavafolder target/classes/ -bintestfolder target/test-classes/
-	
-	# Chart
-	# -srcjavafolder source/ -srctestfolder tests/ -binjavafolder build/ -bintestfolder build-tests/
-	
-	#else
-	#
-	#	# Run the specific bug with jGenProg
-	#	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-	#	fr.inria.main.evolution.AstorMain \
-	#	-mode jgenprog \
-	#	-srcjavafolder /src/java/ \
-	#	-srctestfolder /src/test/ \
-	#	-binjavafolder /target/classes/ \
-	#	-bintestfolder /target/test-classes/ \
-	#	-location "${bug_location}" \
-	#	-mutationrate "${4}" \
-	#	-population "${5}" \
-	#	-seed "${6}" \
-	#	-stopfirst true \
-	#	> "${log_location}/${filename}"
-	#
-	#fi
 }
 
 add_math_dependency(){ # $1 bug_location
 
-	local lib_path = "${1}/lib/" 
+	local lib_path="${1}/lib/" 
 	create_folder "${lib_path}"
 	sudo cp "${math_dependency_location}" "${lib_path}" 
 
@@ -192,7 +102,7 @@ add_math_dependency(){ # $1 bug_location
 
 add_time_dependency(){ # $1 bug_location
 	
-	local lib_path = "${1}/lib/" 
+	local lib_path="${1}/lib/" 
 	create_folder "${lib_path}"
 	sudo cp "${time_dependency_location}" "${lib_path}" 
 	
@@ -271,11 +181,11 @@ execute_chart_bugs(){ # args $1 Project_name $2 Mutation_rate $3 Population_size
 	execute_bug_category Chart "${1}" "${2}" "${3}" "${4}" chart_bugs
 }
 
-execute_bug_set(){ # $1 Project_name $2 Seed $3 Iteration
+execute_bug_set(){ # $1 Project_name $2 Iteration $3 Seed
 
 	local project_name="${1}"
-	local seed="${2}"
-	local iteration="${3}" #update folder structures so iteration is included
+	local seed="${3}"
+	local iteration="${2}" #update folder structures so iteration is included
 
 	#local mutation_rates=(0.25 0.5 0.75 1)
 	#local population_size=(1 25 50 100 200 400)
@@ -291,7 +201,6 @@ execute_bug_set(){ # $1 Project_name $2 Seed $3 Iteration
 			#execute_chart_bugs "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 		done
 	done
-	
 }
 
 execute_iterations(){ # args $1 Project_name $2 Iterations $3 Seed
@@ -301,13 +210,12 @@ execute_iterations(){ # args $1 Project_name $2 Iterations $3 Seed
 	# when iteration with seq 1 is the first value
 	for i in $(seq ${iterations}); 
 	do
-		execute_bug_set() "${1}" "${3}" i
+		execute_bug_set() "${1}" i "${3}"
 	done
 }
 
 
-main() { # args $1 Project_name $2 Iterations
-
+main() { # args $1 Project_name $2 Iterations´
 	local seed=1
 	create_folder "${experiment_location}"
 	#execute_bug_set "${1}" "${2}" "${seed}" 
