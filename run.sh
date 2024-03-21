@@ -89,7 +89,6 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	-stopfirst true" 
 	
 	java "${command}" > "${log_location}/${filename}"
-	
 }
 
 add_math_dependency(){ # $1 bug_location
@@ -97,7 +96,6 @@ add_math_dependency(){ # $1 bug_location
 	local lib_path="${1}/lib/" 
 	create_folder "${lib_path}"
 	sudo cp "${math_dependency_location}" "${lib_path}" 
-
 }
 
 add_time_dependency(){ # $1 bug_location
@@ -105,7 +103,6 @@ add_time_dependency(){ # $1 bug_location
 	local lib_path="${1}/lib/" 
 	create_folder "${lib_path}"
 	sudo cp "${time_dependency_location}" "${lib_path}" 
-	
 }
 
 create_folder(){ # $1 Folder location
@@ -114,7 +111,6 @@ create_folder(){ # $1 Folder location
 	if [ ! -d "${1}" ]; then
 		sudo mkdir "${1}/"
 	fi
-
 }
 
 # Extracts The results, time, and generation from the bug result textfile and save the row in a CSV file
@@ -134,9 +130,10 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 		generation=$(grep -m 1 -o '^NR_GENERATIONS=.*' "${result_location}${filename}" | cut -d'=' -f2- | xargs)
 	fi 
 	
+	# !!!!!!!!! Lägg till fält som har med anledning till varför buggen inte lyckades
+	
 	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
 	echo "${4},${5},${1},${2},${result},${generation},${time}" >> "/${experiment_location}/${3}/project_result.txt"
-	
 }
 
 execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate $4 Population_size $5 Seed $6 bug_array 
@@ -147,21 +144,12 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	local population_size="${4}"
 	local seed="${5}"
 	local -n bug_array="${6}"
-	local result_location="/${experiment_location}/${project_name}"
-	local log_location="${result_location}/logs/"
-	
-	create_folder "${result_location}"
-	create_folder "${log_location}"
-	
-	#Flytta ut till huvudfunktionen, ska bara skapas en gång
-	echo "Mutation,Population,Category,BuggID,Solution,Generation,Time" >> "${result_location}/project_result.txt"
 
 	for bug in "${bug_array[@]}"
     do
         checkout_bug "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
 		run_jgenprog "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}" "${seed}"
 		write_result "${category}" "${bug}" "${project_name}" "${mutation_rate}" "${population_size}"
-		
     done
 }
 
@@ -204,6 +192,16 @@ execute_bug_set(){ # $1 Project_name $2 Iteration $3 Seed
 }
 
 execute_iterations(){ # args $1 Project_name $2 Iterations $3 Seed
+	
+	local project_name="${1}"
+	local result_location="/${experiment_location}/${project_name}"
+	local log_location="${result_location}/logs/"
+	
+	# Create the project and log folders
+	create_folder "${result_location}"
+	create_folder "${log_location}"
+	
+	echo "Mutation,Population,Category,BuggID,Solution,Generation,Time" >> "${result_location}/project_result.txt"
 	
 	local iterations="${2}"
 	
