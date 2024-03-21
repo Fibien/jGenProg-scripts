@@ -8,6 +8,11 @@ path2defects4j="/home/project/defects4j/framework/bin"
 # Use the path variable
 export PATH=$PATH:$path2defects4j
 
+# Experiment_location
+experiment_location="/home/project/experiment/"
+math_dependency_location="/home/project/defects4j/framework/projects/Math/lib/commons-discovery-0.5.jar"
+time_dependency_location="/home/project/defects4j/framework/projects/Time/lib/joda-convert-1.2.jar"
+
 #----- Validate arguments to the script
 
 if [ $# -ne 2 ]; then
@@ -20,9 +25,7 @@ fi
 # Checkout a bug at a location in tmp
 checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $Pop
 
-	local location="/tmp/${3}/${4}_${5}/${1}/${2}"
-	#local pom_file="${location}/pom.xml"
-	#local ant_folder="${location}/ant/"
+	local location="/${experiment_location}/${3}/${4}_${5}/${1}/${2}"
 
     defects4j checkout -p "${1}" -v "${2}"b -w "${location}"
     # Move to bug folder
@@ -31,24 +34,14 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	
 	#Only compile using defects4j
 	defects4j compile
-	
-	#if [ -f "${pom_file}" ]; then
-	#	sudo mvn clean compile test -DskipTests
-	#elif [ -d "${ant_folder}" ]; then
-	#	defects4j compile
-	#else
-	#	echo "Neither pomfile or ant folder found for Category ${1} Bug ${2}" >> "/tmp/${3}/logs/error_log.txt"
-		# try to compile the bug with defects4j 
-	#	defects4j compile
-	#fi	
 	   
 }
 
 # Search for a solution with jGenProg
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $5 Population_size $6 Seed
 
-	local bug_location="/tmp/${3}/${4}_${5}/${1}/${2}"
-	local log_location="/tmp/${3}/logs"
+	local bug_location="/${experiment_location}/${3}/${4}_${5}/${1}/${2}"
+	local log_location="/${experiment_location}/${3}/logs"
 	local filename="result_${4}_${5}_${1}_${2}.txt"
 	local dependency_location="${bug_location}/lib/"
 	local pom_location="${bug_location}/pom.xml"
@@ -76,6 +69,53 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 		-bintestfolder build-tests/ \
 		-location ${bug_location} \
 		-stopfirst true"
+		
+	local time_paths="-srcjavafolder src/main/java/ \
+	-srctestfolder src/test/java/ \
+	-binjavafolder target/classes/ \
+	-bintestfolder target/test-classes"	
+		
+	local math_1_to_84_paths="${time_paths}"
+
+	local math_85_plus_path="-srcjavafolder src/java/ \
+	-srctestfolder src/test/ \
+	-binjavafolder target/classes/ \
+	-bintestfolder target/test-classes/"
+	
+	local chart_paths="-srcjavafolder source/ \
+	-srctestfolder tests/ \
+	-binjavafolder build/ \
+	-bintestfolder build-tests/"
+		
+	local command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
+	    fr.inria.main.evolution.AstorMain"
+	
+	if [ "${1}" = "Time" ]; then
+		command+="${time_paths}"
+		add_time_dependency "${bug_location}"
+	elif [ "${1}" = "Math" ] && [ "${2}" -lt 85 ]; then
+		command+="${math_1_to_84_paths}"
+		add_math_dependency "${bug_location}"
+	elif [ "${1}" = "Math" ]; then
+		command+="${math_85_plus_path}"
+		add_math_dependency "${bug_location}"
+	elif [ "${1}" = "Chart" ]; then
+		command+="${chart_paths}"
+	else
+		echo "Invalid category"
+		exit 1
+	fi
+	
+	command+="
+	-location ${bug_location} \
+	- dependency ${bug_location}/lib/ \
+	-mutationrate ${4} \
+	-population ${5} \
+	-seed ${6} \
+	-stopfirst true" 
+	
+	
+
 
 	# Chart ok med den här lösningen
 	
@@ -142,6 +182,22 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	#fi
 }
 
+add_math_dependency(){ # $1 bug_location
+
+	local lib_path = "${1}/lib/" 
+	create_folder "${lib_path}"
+	sudo cp "${math_dependency_location}" "${lib_path}" 
+
+}
+
+add_time_dependency(){ # $1 bug_location
+	
+	local lib_path = "${1}/lib/" 
+	create_folder "${lib_path}"
+	sudo cp "${time_dependency_location}" "${lib_path}" 
+	
+}
+
 create_folder(){ # $1 Folder location
 
 	# Check if the folder exists adn create if not present
@@ -154,7 +210,7 @@ create_folder(){ # $1 Folder location
 # Extracts The results, time, and generation from the bug result textfile and save the row in a CSV file
 write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation_rate $5 Pop
 	
-	local result_location="/tmp/${3}/logs/"
+	local result_location="/${experiment_location}/${3}/logs/"
 	local filename="result_${4}_${5}_${1}_${2}.txt"	
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
@@ -169,7 +225,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	fi 
 	
 	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
-	echo "${4},${5},${1},${2},${result},${generation},${time}" >> "/tmp/${3}/project_result.txt"
+	echo "${4},${5},${1},${2},${result},${generation},${time}" >> "/${experiment_location}/${3}/project_result.txt"
 	
 }
 
@@ -181,7 +237,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate 
 	local population_size="${4}"
 	local seed="${5}"
 	local -n bug_array="${6}"
-	local result_location="/tmp/${project_name}"
+	local result_location="/${experiment_location}/${project_name}"
 	local log_location="${result_location}/logs/"
 	
 	create_folder "${result_location}"
@@ -253,6 +309,7 @@ execute_iterations(){ # args $1 Project_name $2 Iterations $3 Seed
 main() { # args $1 Project_name $2 Iterations
 
 	local seed=1
+	create_folder "${experiment_location}"
 	#execute_bug_set "${1}" "${2}" "${seed}" 
 	execute_iterations "${1}" "${2}" "${seed}" 
 }
