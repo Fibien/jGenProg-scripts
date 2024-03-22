@@ -8,10 +8,11 @@ path2defects4j="/home/project/defects4j/framework/bin"
 # Use the path variable
 export PATH=$PATH:$path2defects4j
 
-# Experiment_location
-experiment_location="/home/project/experiment/"
 math_dependency_location="/home/project/defects4j/framework/projects/Math/lib/commons-discovery-0.5.jar"
 time_dependency_location="/home/project/defects4j/framework/projects/Time/lib/joda-convert-1.2.jar"
+
+# Experiment_location
+experiment_location="/home/project/experiment/"
 
 #----- Validate arguments to the script
 
@@ -28,13 +29,12 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 	local location="/${experiment_location}/${3}/${4}_${5}/${1}/${2}"
 
     defects4j checkout -p "${1}" -v "${2}"b -w "${location}"
-    # Move to bug folder
+   
+   # Move to bug folder
     cd "${location}"
-    # Compile the bug with maven
 	
-	#Only compile using defects4j
+    # Compile the bug defects4j
 	defects4j compile
-	   
 }
 
 # Search for a solution with jGenProg
@@ -52,7 +52,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 		
 	local math_1_to_84_paths="${time_paths}"
 
-	local math_85_plus_path=" -srcjavafolder src/java/ \
+	local math_85_plus_paths=" -srcjavafolder src/java/ \
 	-srctestfolder src/test/ \
 	-binjavafolder target/classes/ \
 	-bintestfolder target/test-classes/"
@@ -72,7 +72,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Project_name $4 Mutation
 		command+="${math_1_to_84_paths}"
 		add_math_dependency "${bug_location}"
 	elif [ "${1}" = "Math" ]; then
-		command+="${math_85_plus_path}"
+		command+="${math_85_plus_paths}"
 		add_math_dependency "${bug_location}"
 	elif [ "${1}" = "Chart" ]; then
 		command+="${chart_paths}"
