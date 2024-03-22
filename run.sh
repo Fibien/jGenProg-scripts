@@ -225,6 +225,7 @@ execute_iterations(){
 	for i in $(seq ${iterations}); 
 	do
 		execute_bug_set "${i}"
+		echo "i: ${i}"
 	done
 }
 
