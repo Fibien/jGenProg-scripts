@@ -177,7 +177,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_si
 execute_math_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local mutation_rate="${1}"
 	local population_size="${2}"
-	local iteration="{3}"
+	local iteration="${3}"
 	#local math_bugs=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
 	local math_bugs=(53)
 	execute_bug_category Math "${mutation_rate}" "${population_size}" "${iteration}" math_bugs
@@ -186,7 +186,7 @@ execute_math_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 execute_time_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local mutation_rate="${1}"
 	local population_size="${2}"
-	local iteration="{3}"
+	local iteration="${3}"
 	local time_bugs=(4 11)
 	execute_bug_category Time "${mutation_rate}" "${population_size}" "${iteration}" time_bugs
 }
@@ -194,7 +194,7 @@ execute_time_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 execute_chart_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local mutation_rate="${1}"
 	local population_size="${2}"
-	local iteration="{3}"
+	local iteration="${3}"
 	local chart_bugs=(1 3 5 7 13 16 25)
 	execute_bug_category Chart "${mutation_rate}" "${population_size}" "${iteration}" chart_bugs
 }
