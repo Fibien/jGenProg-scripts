@@ -36,7 +36,7 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local mutation_rate="${3}"
 	local population_size="${4}"
 	local iteration="${5}"
-	local bug_location="/${project_location}/${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
+	local bug_location="/${project_location}${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
 
     defects4j checkout -p "${category}" -v "${bug_number}"b -w "${bug_location}"
    
@@ -56,7 +56,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local population_size="${4}"
 	local iteration="${5}"
 
-	local bug_location="/${project_location}/${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
+	local bug_location="/${project_location}${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
 	local dependency_location="${bug_location}/lib/"
 	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"
 		
@@ -153,7 +153,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Pop $5 
 	
 	local status=$(grep -m 1 '^OUTPUT_STATUS=*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 
-	echo "${category},${bug_number},${mutation_rate},${population_size},${iteration},${time},${generation},${result},${status}" >> "/${project_location}/project_result.txt"
+	echo "${category},${bug_number},${mutation_rate},${population_size},${iteration},${time},${generation},${result},${status}" >> "/${project_location}project_result.txt"
 }
 
 execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_size $4 Iteration $5 Bug_array 
@@ -219,20 +219,20 @@ execute_bug_set(){ # $1 Iteration
 
 execute_iterations(){
 	
-	echo "Category,BugID,MutationRate,PopulationSize,Iteration,Time,Generaion,Solution,Status" >> "${project_location}/project_result.txt"
+	echo "Category,BugID,MutationRate,PopulationSize,Iteration,Time,Generaion,Solution,Status" >> "${project_location}project_result.txt"
 	
 	# when iteration with seq 1 is the first value
 	for i in $(seq ${iterations}); 
 	do
-		execute_bug_set() i
+		execute_bug_set "${i}"
 	done
 }
 
 
 main() {
 	seed=1
-	project_location="${experiment_location}/${project_name}"
-	log_location="${project_location}/logs/"
+	project_location="${experiment_location}${project_name}/"
+	log_location="${project_location}logs/"
 	
 	create_folder "${experiment_location}"
 	create_folder "${project_location}"
