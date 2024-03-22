@@ -36,7 +36,7 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local mutation_rate="${3}"
 	local population_size="${4}"
 	local iteration="${5}"
-	local bug_location="/${project_location}${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
+	local bug_location="${project_location}${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
 	echo "category ${category}, bug_number ${bug_number}, buglocation ${bug_location}"
 	echo "location ${location}"
 
