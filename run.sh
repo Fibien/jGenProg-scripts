@@ -36,9 +36,9 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local mutation_rate="${3}"
 	local population_size="${4}"
 	local iteration="${5}"
-	local location="/${project_location}/${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
+	local bug_location="/${project_location}/${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
 
-    defects4j checkout -p "${category}" -v "${bug_number}"b -w "${location}"
+    defects4j checkout -p "${category}" -v "${bug_number}"b -w "${bug_location}"
    
    # Move to bug folder
     cd "${location}"
@@ -57,9 +57,8 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local iteration="${5}"
 
 	local bug_location="/${project_location}/${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
-	local log_location="/${project_location}/logs"
-	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"
 	local dependency_location="${bug_location}/lib/"
+	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"
 		
 	local time_paths=" -srcjavafolder src/main/java/ \
 	-srctestfolder src/test/java/ \
@@ -140,34 +139,30 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Pop $5 
 	
 	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"	
 	
-	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
-	# grep -m 1 -o, print the first occurence, xargs removes beginning and trailing whitespaces
-	local result=$(grep -m 1 -o '^End Repair Search:.*' "${log_location}${filename}" | cut -d':' -f2- | sed 's/solution//' | xargs)
-	local time=$(grep -m 1 -o '^Time Total(s):.*' "${log_location}${filename}" | cut -d':' -f2- | xargs)
+	# cut -d':' -f2- use : as delimiter, choose the substring beginning from the second field to end of line
+	# grep -m 1, -m 1 get the first occurence and xargs removes beginning and trailing whitespaces
+	local result=$(grep -m 1 '^End Repair Search:.*' "${log_location}${filename}" | cut -d':' -f2- | sed 's/solution//' | xargs)
+	local time=$(grep -m 1 '^Time Total(s):.*' "${log_location}${filename}" | cut -d':' -f2- | xargs)
 	local generation=""
+	
 	if [ "$result" == "Found" ]; then
-		generation=$(grep -m 1 -o '^GENERATION=.*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
+		generation=$(grep -m 1 '^GENERATION=.*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 	else 
-		generation=$(grep -m 1 -o '^NR_GENERATIONS=.*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
+		generation=$(grep -m 1 '^NR_GENERATIONS=.*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 	fi 
 	
-	local status=$(grep -m 1 -o '^OUTPUT_STATUS=*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
-	
-	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
-	#echo "${4},${5},${1},${2},${result},${generation},${time},${status}" >> "/${experiment_location}/${3}/project_result.txt"
+	local status=$(grep -m 1 '^OUTPUT_STATUS=*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 
 	echo "${category},${bug_number},${mutation_rate},${population_size},${iteration},${time},${generation},${result},${status}" >> "/${project_location}/project_result.txt"
 }
 
-execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate $4 Population_size $5 Seed $6 Iteration $7 Bug_array 
+execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_size $4 Iteration $5 Bug_array 
 
 	local category="${1}"
-	local project_name="${2}"
-	local mutation_rate="${3}"
-	local population_size="${4}"
-	local seed="${5}"
-	local iteration="${6}"
-	local -n bug_array="${7}"
+	local mutation_rate="${2}"
+	local population_size="${3}"
+	local iteration="${4}"
+	local -n bug_array="${5}"
 
 	for bug in "${bug_array[@]}"
     do
@@ -238,6 +233,7 @@ main() {
 	seed=1
 	project_location="${experiment_location}/${project_name}"
 	log_location="${project_location}/logs/"
+	
 	create_folder "${experiment_location}"
 	create_folder "${project_location}"
 	create_folder "${log_location}"
