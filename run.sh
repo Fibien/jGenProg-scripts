@@ -138,26 +138,25 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Pop $5 
 	local population_size="${4}"
 	local iteration="${5}"
 	
-	local result_location="/${project_location}/logs/"
 	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"	
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning at the second field to end of line
 	# grep -m 1 -o, print the first occurence, xargs removes beginning and trailing whitespaces
-	local result=$(grep -m 1 -o '^End Repair Search:.*' "${result_location}${filename}" | cut -d':' -f2- | sed 's/solution//' | xargs)
-	local time=$(grep -m 1 -o '^Time Total(s):.*' "${result_location}${filename}" | cut -d':' -f2- | xargs)
+	local result=$(grep -m 1 -o '^End Repair Search:.*' "${log_location}${filename}" | cut -d':' -f2- | sed 's/solution//' | xargs)
+	local time=$(grep -m 1 -o '^Time Total(s):.*' "${log_location}${filename}" | cut -d':' -f2- | xargs)
 	local generation=""
 	if [ "$result" == "Found" ]; then
-		generation=$(grep -m 1 -o '^GENERATION=.*' "${result_location}${filename}" | cut -d'=' -f2- | xargs)
+		generation=$(grep -m 1 -o '^GENERATION=.*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 	else 
-		generation=$(grep -m 1 -o '^NR_GENERATIONS=.*' "${result_location}${filename}" | cut -d'=' -f2- | xargs)
+		generation=$(grep -m 1 -o '^NR_GENERATIONS=.*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 	fi 
 	
-	local status=$(grep -m 1 -o '^OUTPUT_STATUS=*' "${result_location}${filename}" | cut -d'=' -f2- | xargs)
+	local status=$(grep -m 1 -o '^OUTPUT_STATUS=*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 	
 	#mutation, population, category, bugg, solution (Found / Not Found), generation, time 
 	#echo "${4},${5},${1},${2},${result},${generation},${time},${status}" >> "/${experiment_location}/${3}/project_result.txt"
 
-	echo "${category},${bug_number},${mutation_rate},${population_size},${iteration},${generation},${time},${result},${status}" >> "/${project_location}/project_result.txt"
+	echo "${category},${bug_number},${mutation_rate},${population_size},${iteration},${time},${generation},${result},${status}" >> "/${project_location}/project_result.txt"
 }
 
 execute_bug_category(){ # args $1 Bug_category $2 Project_name $3 Mutation_rate $4 Population_size $5 Seed $6 Iteration $7 Bug_array 
@@ -225,14 +224,7 @@ execute_bug_set(){ # $1 Iteration
 
 execute_iterations(){
 	
-	local result_location="/${experiment_location}/${project_name}"
-	local log_location="${result_location}/logs/"
-	
-	# Create the project and log folders
-	create_folder "${result_location}"
-	create_folder "${log_location}"
-	
-	echo "Mutation,Population,Category,BuggID,Solution,Generation,Time" >> "${result_location}/project_result.txt"
+	echo "Category,BugID,MutationRate,PopulationSize,Iteration,Time,Generaion,Solution,Status" >> "${project_location}/project_result.txt"
 	
 	# when iteration with seq 1 is the first value
 	for i in $(seq ${iterations}); 
@@ -245,11 +237,14 @@ execute_iterations(){
 main() {
 	seed=1
 	project_location="${experiment_location}/${project_name}"
+	log_location="${project_location}/logs/"
 	create_folder "${experiment_location}"
-	execute_iterations 
+	create_folder "${project_location}"
+	create_folder "${log_location}"
+	execute_iterations 	
 }
 
 # ---- MAIN -----
 
-
 main
+
