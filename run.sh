@@ -104,7 +104,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	-seed ${seed} \
 	-stopfirst true" 
 	
-	java "${command}" > "${log_location}/${filename}"
+	#java "${command}" > "${log_location}/${filename}"
 }
 
 add_math_dependency(){ # $1 bug_location
