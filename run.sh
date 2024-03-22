@@ -37,6 +37,8 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local population_size="${4}"
 	local iteration="${5}"
 	local bug_location="/${project_location}${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
+	echo "category ${category}, bug_number ${bug_number}, buglocation ${bug_location}"
+	echo "location ${location}"
 
     defects4j checkout -p "${category}" -v "${bug_number}"b -w "${bug_location}"
    
@@ -167,8 +169,8 @@ execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_si
 	for bug in "${bug_array[@]}"
     do
         checkout_bug "${category}" "${bug}" "${mutation_rate}" "${population_size}"
-		run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}"
-		write_result "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
+		#run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}"
+		#write_result "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
     done
 }
 
@@ -225,7 +227,6 @@ execute_iterations(){
 	for i in $(seq ${iterations}); 
 	do
 		execute_bug_set "${i}"
-		echo "i: ${i}"
 	done
 }
 
