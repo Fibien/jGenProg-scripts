@@ -28,7 +28,6 @@ iterations="${2}"
 
 #---- Functions
 
-# Checkout a bug at a location in tmp
 checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Population_size $5 Iteration
 
 	local category="${1}"
@@ -38,7 +37,6 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local iteration="${5}"
 	local bug_location="${project_location}${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
 	echo "category ${category}, bug_number ${bug_number}, buglocation ${bug_location}"
-	echo "location ${location}"
 	echo "bug_location ${bug_location}"
 
     defects4j checkout -p "${category}" -v "${bug_number}"b -w "${bug_location}"
