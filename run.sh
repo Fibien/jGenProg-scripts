@@ -59,25 +59,15 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local dependency_location="${bug_location}/lib/"
 	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"
 		
-	local time_paths=" -srcjavafolder src/main/java/ \
-	-srctestfolder src/test/java/ \
-	-binjavafolder target/classes/ \
-	-bintestfolder target/test-classes"	
+	local time_paths=" -srcjavafolder src/main/java/ -srctestfolder src/test/java/ -binjavafolder target/classes/ -bintestfolder target/test-classes"	
 		
 	local math_1_to_84_paths="${time_paths}"
 
-	local math_85_plus_paths=" -srcjavafolder src/java/ \
-	-srctestfolder src/test/ \
-	-binjavafolder target/classes/ \
-	-bintestfolder target/test-classes/"
+	local math_85_plus_paths=" -srcjavafolder src/java/ -srctestfolder src/test/ -binjavafolder target/classes/ -bintestfolder target/test-classes/"
 	
-	local chart_paths=" -srcjavafolder source/ \
-	-srctestfolder tests/ \
-	-binjavafolder build/ \
-	-bintestfolder build-tests/"
+	local chart_paths=" -srcjavafolder source/ -srctestfolder tests/ -binjavafolder build/ -bintestfolder build-tests/"
 		
-	local command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar \
-	    fr.inria.main.evolution.AstorMain"
+	local command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain"
 	
 	if [ "${category}" = "Time" ]; then
 		command+="${time_paths}"
@@ -95,14 +85,9 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 		exit 1
 	fi
 	
-	command+=" -location ${bug_location} \
-	-dependency ${dependency_location} \
-	-mutationrate ${mutation_rate} \
-	-population ${population_size} \
-	-seed ${seed} \
-	-stopfirst true" 
+	command+=" -location ${bug_location} -dependency ${dependency_location} -mutationrate ${mutation_rate} -population ${population_size} -seed ${seed} -stopfirst true" 
 	
-	echo "${command}" > "${log_location}${filename}"
+	echo "${command}" - "${log_location}${filename}"
 	#java "${command}" > "${log_location}${filename}"
 }
 
