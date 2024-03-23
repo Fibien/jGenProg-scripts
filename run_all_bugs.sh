@@ -98,7 +98,6 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	> "${log_location}${filename}"
 		
 	else 
-	
 	sudo java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
     	-srcjavafolder "${sourcejavafolder}" \
     	-srctestfolder "${sourcetestfolder}" \
@@ -110,14 +109,11 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-stopfirst "true" \
     	-seed "${seed}" \
     	> "${log_location}${filename}"
-	
 	fi
-	
-	
 	
 }
 
-add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+add_time_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder
 
 	#local -n arg_sourcefolder="${1}"
 	#local -n arg_srctestfolder="${2}"
@@ -133,7 +129,7 @@ add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintest
 	
 }
 
-add_default_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+add_default_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder 
 
 	local -n arg_sourcefolder="${1}"
 	local -n arg_srctestfolder="${2}"
@@ -147,12 +143,12 @@ add_default_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bint
 	
 }
 
-add_math_1_to_84_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+add_math_1_to_84_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder 
 
 	add_time_bug_paths "${1}" "${2}" "${3}" "${4}"
 }
 
-add_math_85_plus_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+add_math_85_plus_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder 
 
 	local -n arg_sourcefolder="${1}"
 	local -n arg_srctestfolder="${2}"
@@ -165,7 +161,7 @@ add_math_85_plus_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder.
 	arg_bintestfolder="target/test-classes/"		
 }
 
-add_chart_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+add_chart_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder
 
 	local -n arg_sourcefolder="${1}"
 	local -n arg_srctestfolder="${2}"
