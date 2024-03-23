@@ -93,7 +93,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
     	-stopfirst "true" \
-    	-seed "${seed}" 
+    	-seed "${seed}" \
     	> "${log_location}${filename}"
 }
 
