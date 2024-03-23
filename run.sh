@@ -202,7 +202,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_si
 	for bug in "${bug_array[@]}"
     do
         checkout_bug "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
-		#run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
+		run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
 		write_result "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
     done
 }
