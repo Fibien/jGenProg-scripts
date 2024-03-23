@@ -107,7 +107,7 @@ add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintest
 	arg_sourcefolder="src/main/java/"
 	arg_srctestfolder="src/test/java/"
 	arg_binjavafolder="target/classes/"
-	arg_bintestfolder="target/test-classes/"		
+	arg_bintestfolder="target/test-classes/"
 }
 
 add_math_1_to_84_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
@@ -233,6 +233,7 @@ execute_chart_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local population_size="${2}"
 	local iteration="${3}"
 	local chart_bugs=(1 3 5 7 13 16 25)
+	
 	execute_bug_category Chart "${mutation_rate}" "${population_size}" "${iteration}" chart_bugs
 }
 
