@@ -59,36 +59,89 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local dependency_location="${bug_location}/lib/"
 	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"
 		
-	local time_paths=" -srcjavafolder src/main/java/ -srctestfolder src/test/java/ -binjavafolder target/classes/ -bintestfolder target/test-classes"	
-		
-	local math_1_to_84_paths="${time_paths}"
-
-	local math_85_plus_paths=" -srcjavafolder src/java/ -srctestfolder src/test/ -binjavafolder target/classes/ -bintestfolder target/test-classes/"
-	
-	local chart_paths=" -srcjavafolder source/ -srctestfolder tests/ -binjavafolder build/ -bintestfolder build-tests/"
-		
-	local command="-cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain"
+	local astor_main="/home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain"
+	local sourcejavafolder=""
+	local sourcetestfolder=""
+	local binjavafolder=""
+	local bintestfolder=""
 	
 	if [ "${category}" = "Time" ]; then
-		command+="${time_paths}"
+	
+		add_time_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
 		add_time_dependency "${bug_location}"
 	elif [ "${category}" = "Math" ] && [ "${bug_number}" -lt 85 ]; then
-		command+="${math_1_to_84_paths}"
+		add_math_1_to_84_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
 		add_math_dependency "${bug_location}"
 	elif [ "${category}" = "Math" ]; then
-		command+="${math_85_plus_paths}"
+		add_math_85_plus_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
 		add_math_dependency "${bug_location}"
 	elif [ "${category}" = "Chart" ]; then
-		command+="${chart_paths}"
+		add_chart_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
 	else
 		echo "Invalid category"
 		exit 1
 	fi
 	
-	command+=" -location ${bug_location} -dependency ${dependency_location} -mutationrate ${mutation_rate} -population ${population_size} -seed ${seed} -stopfirst true" 
+	echo 
+	echo "java -cp "${astor_main}" \
+    	-mode jgenprog \
+    	-srcjavafolder "${sourcejavafolder}" \
+    	-srctestfolder "${sourcetestfolder}" \
+    	-binjavafolder "${binjavafolder}" \
+    	-bintestfolder "${bintestfolder}" \
+    	-location "${bug_location}" \
+    	-dependency ${dependency_location} \
+    	-mutationrate ${mutation_rate} \
+    	-population ${population_size} \
+    	-stopfirst true \
+    	-seed ${seed} \
+    	> "${log_location}${filename}""
 	
-	#echo "${command}" - "${log_location}${filename}"
-	java "${command}" > "${log_location}${filename}"
+}
+
+add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+
+	local -n arg_sourcefolder="${1}"
+	local -n arg_srctestfolder="${2}"
+	local -n arg_binjavafolder="${3}"
+	local -n arg_bintestfolder="${4}"	
+	
+	arg_sourcefolder="src/main/java/"
+	arg_srctestfolder="src/test/java/"
+	arg_binjavafolder="target/classes/"
+	arg_bintestfolder="target/test-classes"	
+		
+}
+
+add_math_1_to_84_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+
+	add_time_bug_paths "${1}" "${2}" "${3}" "${4}"
+}
+
+add_math_85_plus_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+
+	local -n arg_sourcefolder="${1}"
+	local -n arg_srctestfolder="${2}"
+	local -n arg_binjavafolder="${3}"
+	local -n arg_bintestfolder="${4}"	
+	
+	arg_sourcefolder="src/java/"
+	arg_srctestfolder="src/test/"
+	arg_binjavafolder="target/classes/"
+	arg_bintestfolder="target/test-classes/"		
+}
+
+add_chart_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
+
+	local -n arg_sourcefolder="${1}"
+	local -n arg_srctestfolder="${2}"
+	local -n arg_binjavafolder="${3}"
+	local -n arg_bintestfolder="${4}"	
+	
+	arg_sourcefolder="source/"
+	arg_srctestfolder="tests/"
+	arg_binjavafolder="build/"
+	arg_bintestfolder="build-tests/"		
 }
 
 add_math_dependency(){ # $1 bug_location
