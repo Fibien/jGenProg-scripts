@@ -148,7 +148,7 @@ add_math_1_to_84_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafol
 	add_time_bug_paths "${1}" "${2}" "${3}" "${4}"
 }
 
-add_math_85_plus_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder 
+add_math_85_plus_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder
 
 	local -n arg_sourcefolder="${1}"
 	local -n arg_srctestfolder="${2}"
@@ -247,7 +247,6 @@ execute_math_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local population_size="${2}"
 	local iteration="${3}"
 	local math_bugs=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
-
 	
 	execute_bug_category Math "${mutation_rate}" "${population_size}" "${iteration}" math_bugs
 }
