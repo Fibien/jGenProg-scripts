@@ -107,7 +107,7 @@ add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintest
 	arg_sourcefolder="src/main/java/"
 	arg_srctestfolder="src/test/java/"
 	arg_binjavafolder="target/classes/"
-	arg_bintestfolder="target/test-classes"		
+	arg_bintestfolder="target/test-classes/"		
 }
 
 add_math_1_to_84_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
