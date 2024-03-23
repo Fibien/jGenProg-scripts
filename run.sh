@@ -83,19 +83,19 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	fi
 	
 	echo 
-	echo "java -cp "${astor_main}" \
+	echo java -cp "${astor_main}" \
     	-mode jgenprog \
     	-srcjavafolder "${sourcejavafolder}" \
     	-srctestfolder "${sourcetestfolder}" \
     	-binjavafolder "${binjavafolder}" \
     	-bintestfolder "${bintestfolder}" \
     	-location "${bug_location}" \
-    	-dependency ${dependency_location} \
-    	-mutationrate ${mutation_rate} \
-    	-population ${population_size} \
+    	-dependency "${dependency_location}" \
+    	-mutationrate "${mutation_rate}" \
+    	-population "${population_size}" \
     	-stopfirst true \
-    	-seed ${seed} \
-    	> "${log_location}${filename}""
+    	-seed "${seed}" \
+    	> "${log_location}${filename}"
 	
 }
 
