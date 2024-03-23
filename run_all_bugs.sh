@@ -219,10 +219,9 @@ execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_si
 
 	for bug in "${bug_array[@]}"
     do
-		echo "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
-        #checkout_bug "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
-		#run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
-		#write_result "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
+        checkout_bug "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
+		run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
+		write_result "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
     done
 }
 
@@ -258,8 +257,10 @@ execute_bug_set(){ # $1 Iteration
 
 	local iteration="${1}"
 
-	local mutation_rates=(0.25 0.5 0.75 1)
-	local population_sizes=(1 25 50 100 200 400)
+	#local mutation_rates=(0.25 0.5 0.75 1)
+	#local population_sizes=(1 25 50 100 200 400)
+	local mutation_rates=(1)
+	local population_sizes=(1)
 	
 	for mutation_rate in "${mutation_rates[@]}"
 	do

@@ -240,8 +240,10 @@ execute_bug_set(){ # $1 Iteration
 
 	local iteration="${1}"
 
-	local mutation_rates=(0.25 0.5 0.75 1)
-	local population_sizes=(1 25 50 100 200 400)
+	#local mutation_rates=(0.25 0.5 0.75 1)
+	#local population_sizes=(1 25 50 100 200 400)
+	local mutation_rates=(1)
+	local population_sizes=(1)
 	
 	for mutation_rate in "${mutation_rates[@]}"
 	do
