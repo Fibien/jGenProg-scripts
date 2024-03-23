@@ -187,7 +187,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Pop $5 
 		generation=$(grep -m 1 '^NR_GENERATIONS=.*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
 	fi 
 	
-	local status=$(grep -m 1 '^OUTPUT_STATUS=*' "${log_location}${filename}" | cut -d'=' -f2- | xargs)
+	local status=$(grep -m 1 '^OUTPUT_STATUS=*' "${log_location}${filename}" | cut -d'=' -f2- | xargs | sed 's/ /_/g')
 
 	echo "${category},${bug_number},${mutation_rate},${population_size},${iteration},${time},${generation},${result},${status}" >> "${project_location}project_result.txt"
 }
