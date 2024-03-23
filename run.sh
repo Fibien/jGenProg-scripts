@@ -57,7 +57,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 
 	local bug_location="${project_location}${iteration}/${mutation_rate}_${population_size}/${category}/${bug_number}"
 	local dependency_location="${bug_location}/lib/"
-	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"
+	local filename="result_${category}_${bug_number}_${mutation_rate}_${population_size}_${iteration}.txt"
 		
 	local astor_main="/home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain"
 	local sourcejavafolder=""
@@ -66,24 +66,27 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local bintestfolder=""
 	
 	if [ "${category}" = "Time" ]; then
-	
 		add_time_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
 		add_time_dependency "${bug_location}"
+		
 	elif [ "${category}" = "Math" ] && [ "${bug_number}" -lt 85 ]; then
 		add_math_1_to_84_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
 		add_math_dependency "${bug_location}"
+		
 	elif [ "${category}" = "Math" ]; then
 		add_math_85_plus_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
 		add_math_dependency "${bug_location}"
+		
 	elif [ "${category}" = "Chart" ]; then
 		add_chart_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
+		
 	else
 		echo "Invalid category"
 		exit 1
 	fi
 	
-	echo 
-	echo java -cp "${astor_main}" \
+	
+	java -cp "${astor_main}" \
     	-mode jgenprog \
     	-srcjavafolder "${sourcejavafolder}" \
     	-srctestfolder "${sourcetestfolder}" \
@@ -175,7 +178,7 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Pop $5 
 	local population_size="${4}"
 	local iteration="${5}"
 	
-	local filename="result_${mutation_rate}_${population_size}_${category}_${bug_number}.txt"	
+	local filename="result_${category}_${bug_number}_${mutation_rate}_${population_size}_${iteration}.txt"	
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning from the second field to end of line
 	# grep -m 1, -m 1 get the first occurence and xargs removes beginning and trailing whitespaces
