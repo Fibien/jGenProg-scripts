@@ -202,8 +202,8 @@ execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_si
 	for bug in "${bug_array[@]}"
     do
         checkout_bug "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
-		run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
-		#write_result "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
+		#run_jgenprog "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
+		write_result "${category}" "${bug}" "${mutation_rate}" "${population_size}" "${iteration}"
     done
 }
 
@@ -257,7 +257,7 @@ execute_bug_set(){ # $1 Iteration
 
 execute_iterations(){
 	
-	echo "Category,BugID,MutationRate,PopulationSize,Iteration,Time,Generaion,Solution,Status" >> "${project_location}project_result.txt"
+	echo "Category,BugID,MutationRate,PopulationSize,Iteration,Time,Generation,Solution,Status" >> "${project_location}project_result.txt"
 	
 	# when iteration with seq 1 is the first value
 	for i in $(seq ${iterations}); 
