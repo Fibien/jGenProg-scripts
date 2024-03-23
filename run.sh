@@ -59,7 +59,6 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	local dependency_location="${bug_location}/lib/"
 	local filename="result_${category}_${bug_number}_${mutation_rate}_${population_size}_${iteration}.txt"
 		
-	local astor_main="/home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain"
 	local sourcejavafolder=""
 	local sourcetestfolder=""
 	local binjavafolder=""
@@ -85,19 +84,32 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 		exit 1
 	fi
 	
-	java -cp "${astor_main}" \
-    	-mode jgenprog \
+	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
     	-srcjavafolder "${sourcejavafolder}" \
     	-srctestfolder "${sourcetestfolder}" \
     	-binjavafolder "${binjavafolder}" \
     	-bintestfolder "${bintestfolder}" \
     	-location "${bug_location}" \
-    	-dependency "${dependency_location}" \
+    	-dependencies "${dependency_location}" \
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
-    	-stopfirst true \
-    	-seed "${seed}" \
-    	> "${log_location}${filename}"
+    	-stopfirst "true" \
+    	-seed "${seed}" 
+    	#> "${log_location}${filename}"
+    	
+    	
+    	#java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
+    	#-srcjavafolder "${sourcejavafolder}" \
+    	#-srctestfolder "${sourcetestfolder}" \
+    	#-binjavafolder "${binjavafolder}" \
+    	#-bintestfolder "${bintestfolder}" \
+    	#-location "${bug_location}" \
+    	#-dependencies "${dependency_location}" \
+    	#-mutationrate "${mutation_rate}" \
+    	#-population "${population_size}" \
+    	#-stopfirst "true" \
+    	#-seed "${seed}" 
+    	#> "${log_location}${filename}"
 	
 }
 
