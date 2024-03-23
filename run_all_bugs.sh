@@ -230,8 +230,8 @@ execute_math_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local mutation_rate="${1}"
 	local population_size="${2}"
 	local iteration="${3}"
-	#local math_bugs=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
-	local math_bugs=(53)
+	local math_bugs=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
+	
 	execute_bug_category Math "${mutation_rate}" "${population_size}" "${iteration}" math_bugs
 }
 
@@ -257,18 +257,16 @@ execute_bug_set(){ # $1 Iteration
 
 	local iteration="${1}"
 
-	#local mutation_rates=(0.25 0.5 0.75 1)
-	#local population_size=(1 25 50 100 200 400)
-	local mutation_rates=(1)
-	local population_sizes=(1)
+	local mutation_rates=(0.25 0.5 0.75 1)
+	local population_size=(1 25 50 100 200 400)
 	
 	for mutation_rate in "${mutation_rates[@]}"
 	do
 		for population_size in "${population_sizes[@]}"
 		do
 			execute_math_bugs "${mutation_rate}" "${population_size}" "${iteration}"
-			#execute_time_bugs "${mutation_rate}" "${population_size}" "${iteration}"
-			#execute_chart_bugs "${mutation_rate}" "${population_size}" "${iteration}"
+			execute_time_bugs "${mutation_rate}" "${population_size}" "${iteration}"
+			execute_chart_bugs "${mutation_rate}" "${population_size}" "${iteration}"
 		done
 	done
 }
@@ -277,7 +275,7 @@ execute_iterations(){
 	
 	echo "Category,BugID,MutationRate,PopulationSize,Iteration,Time,Generation,Solution,Status" >> "${project_location}project_result.txt"
 	
-	# when iteration with seq 1 is the first value
+	# 1 is the first value when iterating with seq
 	for i in $(seq ${iterations}); 
 	do
 		execute_bug_set "${i}"
