@@ -83,7 +83,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 		exit 1
 	fi
 	
-	java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
+	sudo java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
     	-srcjavafolder "${sourcejavafolder}" \
     	-srctestfolder "${sourcetestfolder}" \
     	-binjavafolder "${binjavafolder}" \
