@@ -46,7 +46,6 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	defects4j compile
 }
 
-# Search for a solution with jGenProg
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Population_size $5 Iteration
 
 	local category="${1}"
@@ -95,22 +94,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-population "${population_size}" \
     	-stopfirst "true" \
     	-seed "${seed}" 
-    	#> "${log_location}${filename}"
-    	
-    	
-    	#java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
-    	#-srcjavafolder "${sourcejavafolder}" \
-    	#-srctestfolder "${sourcetestfolder}" \
-    	#-binjavafolder "${binjavafolder}" \
-    	#-bintestfolder "${bintestfolder}" \
-    	#-location "${bug_location}" \
-    	#-dependencies "${dependency_location}" \
-    	#-mutationrate "${mutation_rate}" \
-    	#-population "${population_size}" \
-    	#-stopfirst "true" \
-    	#-seed "${seed}" 
-    	#> "${log_location}${filename}"
-	
+    	> "${log_location}${filename}"
 }
 
 add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
@@ -123,8 +107,7 @@ add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintest
 	arg_sourcefolder="src/main/java/"
 	arg_srctestfolder="src/test/java/"
 	arg_binjavafolder="target/classes/"
-	arg_bintestfolder="target/test-classes"	
-		
+	arg_bintestfolder="target/test-classes"		
 }
 
 add_math_1_to_84_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
@@ -174,7 +157,7 @@ add_time_dependency(){ # $1 bug_location
 
 create_folder(){ # $1 Folder location
 
-	# Check if the folder exists adn create if not present
+	# Check if the folder exists and create if not present
 	if [ ! -d "${1}" ]; then
 		sudo mkdir "${1}/"
 	fi
@@ -225,6 +208,7 @@ execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_si
 }
 
 execute_math_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
+
 	local mutation_rate="${1}"
 	local population_size="${2}"
 	local iteration="${3}"
@@ -234,6 +218,7 @@ execute_math_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 }
 
 execute_time_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
+
 	local mutation_rate="${1}"
 	local population_size="${2}"
 	local iteration="${3}"
@@ -242,6 +227,7 @@ execute_time_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 }
 
 execute_chart_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
+
 	local mutation_rate="${1}"
 	local population_size="${2}"
 	local iteration="${3}"
@@ -282,6 +268,7 @@ execute_iterations(){
 
 
 main() {
+
 	seed=1
 	project_location="${experiment_location}${project_name}/"
 	log_location="${project_location}logs/"
