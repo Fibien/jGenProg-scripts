@@ -145,7 +145,7 @@ add_default_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $
 
 add_math_1_to_84_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder 
 
-	add_time_bug_paths "${1}" "${2}" "${3}" "${4}"
+	add_default_bug_paths "${1}" "${2}" "${3}" "${4}"
 }
 
 add_math_85_plus_bug_paths(){ # args $1 srcfolder $2 srctestfolder $3 binjavafolder $4 bintestfolder
