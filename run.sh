@@ -176,7 +176,8 @@ write_result(){ # args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Pop $5 
 	
 	# cut -d':' -f2- use : as delimiter, choose the substring beginning from the second field to end of line
 	# grep -m 1, -m 1 get the first occurence and xargs removes beginning and trailing whitespaces
-	local result=$(grep -m 1 '^End Repair Search:.*' "${log_location}${filename}" | cut -d':' -f2- | sed 's/solution//' | xargs)
+	# sed 's/solution//' removes the text solution and sed 's/ /_/g' 
+	local result=$(grep -m 1 '^End Repair Search:.*' "${log_location}${filename}" | cut -d':' -f2- | sed 's/solution//' | xargs | sed 's/ /_/g')
 	local time=$(grep -m 1 '^Time Total(s):.*' "${log_location}${filename}" | cut -d':' -f2- | xargs)
 	local generation=""
 	
