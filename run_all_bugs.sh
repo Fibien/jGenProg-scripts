@@ -65,15 +65,15 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 	
 	if [ "${category}" = "Time" ]; then
 		add_time_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
-		add_time_dependency "${bug_location}"
+		#add_time_dependency "${bug_location}"
 		
 	elif [ "${category}" = "Math" ] && [ "${bug_number}" -lt 85 ]; then
 		add_math_1_to_84_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
-		add_math_dependency "${bug_location}"
+		#add_math_dependency "${bug_location}"
 		
 	elif [ "${category}" = "Math" ]; then
 		add_math_85_plus_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
-		add_math_dependency "${bug_location}"
+		#add_math_dependency "${bug_location}"
 		
 	elif [ "${category}" = "Chart" ]; then
 		add_chart_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
@@ -83,6 +83,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 		exit 1
 	fi
 	
+	if [ "${category}" = "Chart" ]; then
 	sudo java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
     	-srcjavafolder "${sourcejavafolder}" \
     	-srctestfolder "${sourcetestfolder}" \
@@ -95,6 +96,22 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-stopfirst "true" \
     	-seed "${seed}" \
     	> "${log_location}${filename}"
+		
+	else 
+	
+	sudo java -cp /home/project/astor/target/astor-*-jar-with-dependencies.jar fr.inria.main.evolution.AstorMain -mode jgenprog \
+    	-srcjavafolder "${sourcejavafolder}" \
+    	-srctestfolder "${sourcetestfolder}" \
+    	-binjavafolder "${binjavafolder}" \
+    	-bintestfolder "${bintestfolder}" \
+    	-location "${bug_location}" \
+    	-mutationrate "${mutation_rate}" \
+    	-population "${population_size}" \
+    	-stopfirst "true" \
+    	-seed "${seed}" \
+    	> "${log_location}${filename}"
+	
+	fi
 }
 
 add_time_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintestfolder 
@@ -141,19 +158,19 @@ add_chart_bug_paths(){ # args $1 srcfolder, srctestfolder, binjavafolder. bintes
 	arg_bintestfolder="build-tests/"		
 }
 
-add_math_dependency(){ # $1 bug_location
-	
-	local lib_path="${1}/lib/" 
-	create_folder "${lib_path}"
-	sudo cp "${math_dependency_location}" "${lib_path}" 
-}
+#add_math_dependency(){ # $1 bug_location
+#	
+#	local lib_path="${1}/lib/" 
+#	create_folder "${lib_path}"
+#	sudo cp "${math_dependency_location}" "${lib_path}" 
+#}
 
-add_time_dependency(){ # $1 bug_location
-	
-	local lib_path="${1}/lib/" 
-	create_folder "${lib_path}"
-	sudo cp "${time_dependency_location}" "${lib_path}" 
-}
+#add_time_dependency(){ # $1 bug_location
+#	
+#	local lib_path="${1}/lib/" 
+#	create_folder "${lib_path}"
+#	sudo cp "${time_dependency_location}" "${lib_path}" 
+#}
 
 create_folder(){ # $1 Folder location
 
