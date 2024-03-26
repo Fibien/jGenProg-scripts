@@ -254,7 +254,7 @@ execute_iterations(){
 main() {
 
 	seed=1
-	max_time = 20
+	max_time=20
 	project_location="${experiment_location}${project_name}/"
 	log_location="${project_location}logs/"
 	
