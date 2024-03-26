@@ -87,7 +87,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
     	-stopfirst "true" \
-		-maxtime "${max_time}"\ # in minutes
+		-maxtime ${max_time} \
     	-seed "${seed}" \
     	> "${log_location}${filename}"
 		
@@ -100,7 +100,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-location "${bug_location}" \
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
-		-maxtime "${max_time}"\ # in minutes
+		-maxtime ${max_time} \
     	-stopfirst "true" \
     	-seed "${seed}" \
     	> "${log_location}${filename}"

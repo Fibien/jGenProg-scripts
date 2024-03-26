@@ -87,7 +87,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
     	-stopfirst "true" \
-		-maxtime "${max_time}"\ # in minutes
+		-maxtime ${max_time} \
     	-seed "${seed}" \
     	> "${log_location}${filename}"
 		
@@ -100,7 +100,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-location "${bug_location}" \
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
-		-maxtime "${max_time}"\ # in minutes
+		-maxtime ${max_time} \
     	-stopfirst "true" \
     	-seed "${seed}" \
     	> "${log_location}${filename}"
@@ -217,7 +217,7 @@ execute_chart_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local population_size="${2}"
 	local iteration="${3}"
 	#local chart_bugs=(1 3 5 7 13 16 25)
-	local chart_bugs=(1 13 25)
+	local chart_bugs=(13)
 	
 	execute_bug_category Chart "${mutation_rate}" "${population_size}" "${iteration}" chart_bugs
 }
