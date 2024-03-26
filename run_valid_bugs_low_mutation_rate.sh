@@ -45,8 +45,6 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Population_size $5 Iteration
 
-	echo "Seed ${seed} Maxtime ${max_time}"
-
 	local category="${1}"
 	local bug_number="${2}"
 	local mutation_rate="${3}"

@@ -45,8 +45,6 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Population_size $5 Iteration
 
-	echo "Seed ${seed} Maxtime ${max_time}"
-
 	local category="${1}"
 	local bug_number="${2}"
 	local mutation_rate="${3}"
@@ -206,7 +204,7 @@ execute_math_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local population_size="${2}"
 	local iteration="${3}"
 	#local math_bugs=(2 5 8 28 40 49 50 53 70 71 73 78 80 81 82 84 85 95)
-	local math_bugs=(2 8 40 49 50 53 70 73 80 81 85 95)
+	local math_bugs=(50 53 70 73 85 95)
 	
 	execute_bug_category Math "${mutation_rate}" "${population_size}" "${iteration}" math_bugs
 }
@@ -217,7 +215,7 @@ execute_chart_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local population_size="${2}"
 	local iteration="${3}"
 	#local chart_bugs=(1 3 5 7 13 16 25)
-	local chart_bugs=(1 13 25)
+	local chart_bugs=(13)
 	
 	execute_bug_category Chart "${mutation_rate}" "${population_size}" "${iteration}" chart_bugs
 }
