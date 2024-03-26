@@ -15,9 +15,6 @@ path2defects4j="/home/project/defects4j/framework/bin"
 # Add defects4j path variable to path
 export PATH=$PATH:$path2defects4j
 
-math_dependency_location="/home/project/defects4j/framework/projects/Math/lib/commons-discovery-0.5.jar"
-time_dependency_location="/home/project/defects4j/framework/projects/Time/lib/joda-convert-1.2.jar"
-
 # Experiment_location
 experiment_location="/home/project/experiment/"
 
@@ -47,6 +44,8 @@ checkout_bug() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 }
 
 run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Population_size $5 Iteration
+
+	echo "Seed ${seed} Maxtime ${max_time}"
 
 	local category="${1}"
 	local bug_number="${2}"
@@ -88,6 +87,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
     	-stopfirst "true" \
+		-maxtime "${max_time}"\ # in minutes
     	-seed "${seed}" \
     	> "${log_location}${filename}"
 		
@@ -100,6 +100,7 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
     	-location "${bug_location}" \
     	-mutationrate "${mutation_rate}" \
     	-population "${population_size}" \
+		-maxtime "${max_time}"\ # in minutes
     	-stopfirst "true" \
     	-seed "${seed}" \
     	> "${log_location}${filename}"
@@ -225,10 +226,8 @@ execute_bug_set(){ # $1 Iteration
 
 	local iteration="${1}"
 
-	local mutation_rates=(0.25 0.5 0.75 1)
-	local population_sizes=(1 25 50 100 200 400)
-	#local mutation_rates=(1)
-	#local population_sizes=(1)
+	local mutation_rates=(1 0.9)
+	local population_sizes=(1 10 20 30 40 50 100, 200, 300, 400, 600)
 	
 	for mutation_rate in "${mutation_rates[@]}"
 	do
@@ -255,6 +254,7 @@ execute_iterations(){
 main() {
 
 	seed=1
+	max_time = 20
 	project_location="${experiment_location}${project_name}/"
 	log_location="${project_location}logs/"
 	
