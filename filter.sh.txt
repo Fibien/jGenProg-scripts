@@ -18,4 +18,4 @@ while IFS= read -r line; do
 	# Add line break
 	"" >> $2 
   fi
-done < filename
+done < $1
