@@ -1,0 +1,545 @@
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_20/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_20/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_20/Math/53. OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_30/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_30/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_30/Math/53. OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_40/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_40/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_40/Math/53. OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_50/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_50/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_50/Math/53. OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_100/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_100/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_100/Math/53 OK
+
+Check out program version: Math-70b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.NullPointerException
+	at fr.inria.astor.approaches.jgenprog.operators.StatementSupporter.remove(StatementSupporter.java:39)
+	at fr.inria.astor.approaches.jgenprog.operators.InsertBeforeOp.undoChangesInModel(InsertBeforeOp.java:67)
+	at fr.inria.astor.core.entities.OperatorInstance.undoModification(OperatorInstance.java:181)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.undoOperationToSpoonElement(AstorCoreEngine.java:941)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.undoSingleGeneration(AstorCoreEngine.java:613)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.reverseOperationInModel(AstorCoreEngine.java:600)
+	at fr.inria.astor.core.solutionsearch.EvolutionarySearchEngine.processGenerations(EvolutionarySearchEngine.java:173)
+	at fr.inria.astor.core.solutionsearch.EvolutionarySearchEngine.startSearch(EvolutionarySearchEngine.java:70)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:176)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Checking out 29c3b75e to /home/project/experiment/mid_mut/1/0.7_100/Math/73 OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_200/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_200/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_200/Math/53 OK
+
+Check out program version: Math-53b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_200/Math/53/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_200/Math/53/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out f41fcd85 to /home/project/experiment/mid_mut/1/0.7_200/Math/70 OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_300/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_300/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_300/Math/53 OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_400/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_400/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_400/Math/53 OK
+
+Check out program version: Math-53b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_400/Math/53/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_400/Math/53/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out f41fcd85 to /home/project/experiment/mid_mut/1/0.7_400/Math/70 OK
+
+Check out program version: Math-50b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_600/Math/50/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_600/Math/50/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out 7707b0bb to /home/project/experiment/mid_mut/1/0.7_600/Math/53 OK
+
+Check out program version: Math-53b........................................ OK
+Running ant (compile)...................................................... OK
+Running ant (compile.tests)................................................ OK
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.lang.UNIXProcess.exitValue(UNIXProcess.java:421)
+	at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:850)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:741)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Exception in thread "main" java.lang.RuntimeException: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_600/Math/53/./target/CoveredTestResultPerTest.dat
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:113)
+	at eu.stamp_project.testrunner.listener.impl.OnlineCoveredTestResultPerTestMethodImpl.load(OnlineCoveredTestResultPerTestMethodImpl.java:169)
+	at eu.stamp_project.testrunner.EntryPoint.runOnlineCoveredTestResultPerTestMethods(EntryPoint.java:749)
+	at fr.spoonlabs.flacoco.core.coverage.framework.JUnit4Strategy.execute(JUnit4Strategy.java:25)
+	at fr.spoonlabs.flacoco.core.coverage.CoverageRunner.getCoverageMatrix(CoverageRunner.java:47)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.computeCoverageMatrix(SpectrumRunner.java:68)
+	at fr.spoonlabs.flacoco.localization.spectrum.SpectrumRunner.run(SpectrumRunner.java:42)
+	at fr.spoonlabs.flacoco.api.Flacoco.run(Flacoco.java:31)
+	at fr.inria.astor.core.faultlocalization.flacoco.FlacocoFaultLocalization.searchSuspicious(FlacocoFaultLocalization.java:59)
+	at fr.inria.astor.core.solutionsearch.AstorCoreEngine.calculateSuspicious(AstorCoreEngine.java:1014)
+	at fr.inria.main.evolution.AstorMain.createEngine(AstorMain.java:102)
+	at fr.inria.main.evolution.AstorMain.run(AstorMain.java:160)
+	at fr.inria.main.evolution.AstorMain.execute(AstorMain.java:222)
+	at fr.inria.main.evolution.AstorMain.main(AstorMain.java:193)
+Caused by: java.nio.file.NoSuchFileException: /home/project/experiment/mid_mut/1/0.7_600/Math/53/./target/CoveredTestResultPerTest.dat
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:335)
+	at eu.stamp_project.testrunner.listener.utils.ListenerUtils.loadFromMemoryMappedFile(ListenerUtils.java:97)
+	... 13 more
+Checking out f41fcd85 to /home/project/experiment/mid_mut/1/0.7_600/Math/70 OK
