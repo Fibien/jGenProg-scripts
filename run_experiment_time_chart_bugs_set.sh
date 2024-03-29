@@ -243,7 +243,7 @@ execute_chart_bugs(){ # args $1 Mutation_rate $2 Population_size $3 iteration
 	local population_size="${2}"
 	local iteration="${3}"
 	#local chart_bugs=(1 3 5 7 13 16 25)
-	local chart_bugs=(13)
+	local chart_bugs=(1 3 5 7 13 16 25)
 	
 	execute_bug_category Chart "${mutation_rate}" "${population_size}" "${iteration}" chart_bugs
 }
@@ -260,7 +260,7 @@ execute_bug_set(){ # $1 Iteration
 		for population_size in "${population_sizes[@]}"
 		do
 			execute_time_bugs "${mutation_rate}" "${population_size}" "${iteration}"
-			execute_math_bugs "${mutation_rate}" "${population_size}" "${iteration}"
+			#execute_math_bugs "${mutation_rate}" "${population_size}" "${iteration}"
 			execute_chart_bugs "${mutation_rate}" "${population_size}" "${iteration}"
 		done
 	done
