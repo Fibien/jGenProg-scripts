@@ -11,7 +11,8 @@ filename=$1
 in_checkout=false
 
 while IFS= read -r line; do
-  if  [[ "$line" == *"Check out"*  ]]; then
+
+  if  [[ "$line" == *"Checking out"*  ]] || [[ "$line" == *"Check out"*  ]]; then
     echo "$line" >> $2
   elif [[ "$line" == *"java"* ]]; then
 	echo "$line" >> $2
