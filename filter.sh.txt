@@ -11,21 +11,8 @@ filename=$1
 # Flag to indicate if we are currently in a section starting with "checkout"
 in_checkout=false
 
-# Loop through each line of the file
 while IFS= read -r line; do
-    # Check if the line starts with "checkout"
-    if [[ $line == checkout* ]]; then
-        # Print the "checkout" line
-        echo "$line"
-        # Set flag to true indicating we are in a "checkout" section
-        in_checkout=true
-    fi
-    
-    # Check if we are in a "checkout" section and the line starts with "java."
-    if $in_checkout && [[ $line == java.* ]]; then
-        # Print the "java" line
-        echo "$line"
-        # Set in_checkout to false after printing the java line
-        in_checkout=false
-    fi
-done < "$filename"
+  if [[ "$line" == *"java"* ]] || [[ "$line" == *"Check out"*  ]]; then
+    printf '%s\n' "$line"
+  fi
+done < filename
