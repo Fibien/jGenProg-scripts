@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # Check if filename is provided as an argument
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <filename>"
-    exit 1
+if [ $# -ne 2 ]; then
+    echo "Need from file and to file as arguments"
 fi
 
 filename=$1
@@ -12,7 +11,11 @@ filename=$1
 in_checkout=false
 
 while IFS= read -r line; do
-  if [[ "$line" == *"java"* ]] || [[ "$line" == *"Check out"*  ]]; then
-    printf '%s\n' "$line"
+  if  [[ "$line" == *"Check out"*  ]]; then
+    "$line" >> $2
+  elif [[ "$line" == *"java"* ]]; then
+	"$line" >> $2
+	# Add line break
+	"" >> $2 
   fi
 done < filename
