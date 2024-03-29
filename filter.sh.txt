@@ -3,20 +3,46 @@
 # Check if filename is provided as an argument
 if [ $# -ne 2 ]; then
     echo "Need from file and to file as arguments"
+    exit 1
 fi
 
-filename=$1
+from_file=$1
+to_file=$2
 
-# Flag to indicate if we are currently in a section starting with "checkout"
-in_checkout=false
+# Variables to store lines
+checkout_line=""
+checkout_out_line=""
+java_line=""
+
+# Flag to indicate if all three lines are found
+found_all=false
 
 while IFS= read -r line; do
 
-  if  [[ "$line" == *"Checking out"*  ]] || [[ "$line" == *"Check out"*  ]]; then
-    echo "$line" >> $2
-  elif [[ "$line" == *"java"* ]]; then
-	echo "$line" >> $2
-	# Add line break
-	echo "" >> $2 
+  if [[ "$line" == *"Checking out"* ]]; then
+    # Reset all variables when encountering a new "Checking out" line
+    checkout_line="$line"
+    checkout_out_line=""
+    java_line=""
+    found_all=false
+  elif [[ "$line" == *"Check out"* && -n "$checkout_line" ]]; then
+    checkout_out_line="$line"
+  elif [[ "$line" == *"java"* && -n "$checkout_line" && -n "$checkout_out_line" ]]; then
+    java_line="$line"
+    found_all=true
   fi
-done < $1
+
+  # If all three lines are found, print them to the output file
+  if $found_all; then
+    echo "$checkout_line" >> "$to_file"
+    echo "$checkout_out_line" >> "$to_file"
+    echo "$java_line" >> "$to_file"
+    echo "" >> "$to_file" # Add a blank line after printing the three lines
+    # Reset variables for the next set of lines
+    checkout_line=""
+    checkout_out_line=""
+    java_line=""
+    found_all=false
+  fi
+
+done < "$from_file"
