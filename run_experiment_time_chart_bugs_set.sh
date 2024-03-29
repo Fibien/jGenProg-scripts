@@ -63,7 +63,6 @@ run_jgenprog() { #args $1 Bug_category $2 Bug_number $3 Mutation_rate $4 Populat
 
 	if [ "${category}" = "Time" ]; then
 		add_time_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
-		echo "In valid if statement ${sourcejavafolder}, ${sourcetestfolder}, ${binjavafolder}, ${bintestfolder}"
 	
 	elif [ "${category}" = "Math" ] && [ "${bug_number}" -lt 85 ]; then
 		add_math_1_to_84_bug_paths sourcejavafolder sourcetestfolder binjavafolder bintestfolder
@@ -208,8 +207,6 @@ execute_bug_category(){ # args $1 Bug_category $2 Mutation_rate $3 Population_si
 	local population_size="${3}"
 	local iteration="${4}"
 	local -n bug_array="${5}"
-	
-	echo "Category: $1 Mutationrate: $2 Popsize: $3 Iteration: $4 Array: $5"
 		
 	for bug in "${bug_array[@]}"
     do
